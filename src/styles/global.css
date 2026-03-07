@@ -102,4 +102,11 @@
         transform: translateY(-4px);
         border-color: var(--color-accent);
     }
+
+    @variant dark {
+        box-shadow: 0 0 20px oklch(65% 0.208 25.52 / 0.1);
+        &:hover {
+            box-shadow: 0 0 30px oklch(65% 0.208 25.52 / 0.2);
+        }
+    }
 }
