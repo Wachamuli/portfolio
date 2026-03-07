@@ -1,1 +1,112 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter-VariableFont_opsz,wght.ttf")
+        format("truetype-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    font-optical-sizing: auto;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf")
+        format("truetype-variations");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+    font-optical-sizing: auto;
+}
+
+@font-face {
+    font-family: "Lilex";
+    src: url("/fonts/Lilex[wght].woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Lilex";
+    src: url("/fonts/Lilex-Italic[wght].woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@theme {
+    --color-primary: oklch(100% 0 0);
+    --color-accent: oklch(53.25% 0.208 25.52);
+    --color-accent-soft: oklch(92% 0.03 25.52);
+    --color-background: oklch(98.2% 0.002 240);
+    --color-text: oklch(21.4% 0.006 250);
+
+    --font-sans: "Inter", system-ui, sans-serif;
+    --font-mono: "Lilex", monospace;
+
+    --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    --text-4xl: clamp(2rem, 1.1rem + 4.5vw, 4rem);
+
+    --transition-standard: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@layer theme {
+    * {
+        @variant dark {
+            --color-primary: oklch(20% 0.01 250);
+            --color-accent: oklch(65% 0.208 25.52);
+            --color-accent-soft: oklch(30% 0.08 25.52);
+            --color-background: oklch(12% 0.01 250);
+            --color-text: oklch(95% 0.01 240);
+        }
+    }
+}
+
+@layer base {
+    body {
+        @apply bg-background text-text font-sans antialiased;
+        transition:
+            background-color var(--transition-standard),
+            color var(--transition-standard);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply text-text font-mono tracking-tight;
+    }
+
+    a,
+    button {
+        transition: all var(--transition-standard);
+    }
+
+    p {
+        max-width: 65ch;
+        line-height: 1.6;
+    }
+}
+
+@utility project-img {
+    @apply rounded-lg border border-background shadow-sm overflow-hidden bg-background;
+    transition: transform var(--transition-standard);
+
+    &:hover {
+        transform: translateY(-4px);
+        border-color: var(--color-accent);
+    }
+
+    @variant dark {
+        box-shadow: 0 0 20px oklch(65% 0.208 25.52 / 0.1);
+        &:hover {
+            box-shadow: 0 0 30px oklch(65% 0.208 25.52 / 0.2);
+        }
+    }
+}
