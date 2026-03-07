@@ -3,11 +3,93 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-    <div class="flex">
-        <div class="w-52 h-52 bg-accent"></div>
-        <div class="w-52 h-52 bg-accent-soft"></div>
-        <div class="w-52 h-52 bg-primary"></div>
-        <div class="w-52 h-52 bg-background"></div>
-        <div class="w-52 h-52 bg-text"></div>
-    </div>
+    <section class="p-8 max-w-4xl mx-auto space-y-12">
+        <div class="space-y-4 border-b pb-8 border-background">
+            <h1 class="font-mono text-4xl font-bold text-accent">
+                Lilex Header 1
+            </h1>
+            <h2 class="font-mono text-2xl font-semibold text-text">
+                Lilex Header 2
+            </h2>
+            <p class="font-sans text-lg text-text leading-relaxed">
+                This is your <span class="text-accent font-bold"
+                    >Inter Sans</span
+                > body text. It's perfect for explaining complex system optimizations
+                or Rust project architectures.
+            </p>
+            <code class="font-mono bg-background px-2 py-1 rounded text-accent">
+                fn optimize_boot_time() -> u32 {16}
+            </code>
+        </div>
+
+        <div class="space-y-4">
+            <h3
+                class="font-mono text-sm uppercase tracking-widest text-text/50"
+            >
+                System Palette
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="space-y-2">
+                    <div
+                        class="aspect-square rounded-lg bg-accent shadow-lg shadow-accent/20"
+                    >
+                    </div>
+                    <span class="font-mono text-xs block text-center"
+                        >Accent (Red)</span
+                    >
+                </div>
+                <div class="space-y-2">
+                    <div
+                        class="aspect-square rounded-lg bg-accent-soft border border-accent/20"
+                    >
+                    </div>
+                    <span class="font-mono text-xs block text-center"
+                        >Accent Soft</span
+                    >
+                </div>
+                <div class="space-y-2">
+                    <div
+                        class="aspect-square rounded-lg bg-primary border border-background"
+                    >
+                    </div>
+                    <span class="font-mono text-xs block text-center"
+                        >Primary (White)</span
+                    >
+                </div>
+                <div class="space-y-2">
+                    <div class="aspect-square rounded-lg bg-background"></div>
+                    <span class="font-mono text-xs block text-center"
+                        >Background</span
+                    >
+                </div>
+                <div class="space-y-2">
+                    <div class="aspect-square rounded-lg bg-text"></div>
+                    <span class="font-mono text-xs block text-center"
+                        >Text (Ink)</span
+                    >
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="bg-primary p-6 rounded-xl border border-background shadow-sm space-y-4"
+        >
+            <span
+                class="bg-accent-soft text-accent font-mono text-xs px-2 py-1 rounded-full uppercase font-bold"
+                >Project: Lucien</span
+            >
+            <h4 class="font-mono text-xl font-bold">
+                High Performance App Launcher
+            </h4>
+            <p class="text-text/80 text-sm">
+                Optimizing syscalls to reach sub-16ms startup times in Wayland
+                environments.
+            </p>
+            <button
+                class="bg-accent text-primary px-4 py-2 rounded font-sans font-bold hover:brightness-110 transition-all"
+            >
+                View Repository
+            </button>
+        </div>
+    </section>
 </Layout>

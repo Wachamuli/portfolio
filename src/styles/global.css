@@ -1,9 +1,48 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter-VariableFont_opsz,wght.ttf")
+        format("truetype-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    font-optical-sizing: auto;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf")
+        format("truetype-variations");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+    font-optical-sizing: auto;
+}
+
+@font-face {
+    font-family: "Lilex";
+    src: url("/fonts/Lilex[wght].woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Lilex";
+    src: url("/fonts/Lilex-Italic[wght].woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
 @theme {
     --color-primary: oklch(100% 0 0);
     --color-accent: oklch(53.25% 0.208 25.52);
     --color-accent-soft: oklch(92% 0.03 25.52);
     --color-background: oklch(98.2% 0.002 240);
     --color-text: oklch(21.4% 0.006 250);
+
+    --font-sans: "Inter", system-ui, sans-serif;
+    --font-mono: "Lilex", monospace;
 }
