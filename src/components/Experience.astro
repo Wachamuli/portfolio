@@ -1,37 +1,43 @@
 ---
 const experiences = [
     {
+        id: "01",
+        label: "node_health_one",
+        role: "Full-Stack Web Developer",
+        url: "https://production.roca-pane.com",
         company: "Health One",
-        role: "Full-Stack Web Developer",
-        project: "Roca Project",
-        period: "Jan 2025 - Feb 2026",
-        stack: ["Next.js", "AWS", "SQL", "Tailwind CSS"],
+        period: "2025.01 — 2026.02",
+        stack: ["Next.js", "AWS", "SQL"],
         details: [
-            "Architected relational database schema and back-end logic for AWS scalability[cite: 10].",
-            "Engineered real-time Alert Notification and Payment Tracking modules[cite: 11].",
-            "Optimized server-side rendering with Next.js for sub-perceptual latency[cite: 12].",
+            "Architected relational database schema and back-end logic for AWS scalability. [cite: 10]",
+            "Developed real-time Alert Notification and Payment Tracking modules. [cite: 11]",
         ],
     },
     {
-        company: "SMSU",
-        role: "Full-Stack Web Developer",
-        project: "Rebuild2Reintegrate",
-        period: "Jan 2025 - Dec 2025",
-        stack: ["Astro.js", "Supabase", "GitHub Actions", "Deno"],
-        details: [
-            "Led full-cycle development from schema design to automated production[cite: 15].",
-            "Built CI/CD pipelines for seamless deployment to Deno Deploy[cite: 16].",
-            "Designed high-performance UI/UX with Astro.js and Tailwind CSS[cite: 18].",
-        ],
-    },
-    {
-        company: "SMSU CS Lab",
-        role: "Unix Laboratory Assistant",
-        period: "Sep 2024 - Dec 2025",
-        stack: ["Linux", "Python", "JavaScript", "Bash"],
-        details: [
-            "Tutored foundational data structures and algorithms in Unix environments[cite: 21].",
-            "Simplified complex IPC and kernel-level concepts for diverse learners[cite: 22].",
+        id: "02",
+        label: "node_smsu_root",
+        company: "Southwest Minnesota State University",
+        isRoot: true,
+        roles: [
+            {
+                role: "Full-Stack Web Developer",
+                url: "https://rebuild2reintegrate.com",
+                period: "2025.01 — 2025.12",
+                stack: ["Astro.js", "Supabase", "GitHub Actions"],
+                details: [
+                    "Led end-to-end development of the Rebuild2Reintegrate project. [cite: 15]",
+                    "Architected CI/CD pipelines for seamless Deno Deploy integration. [cite: 16]",
+                ],
+            },
+            {
+                role: "Unix Laboratory Assistant",
+                period: "2024.09 — 2025.12",
+                stack: ["Linux", "Python", "Bash"],
+                details: [
+                    "Provided tutoring in foundational CS courses including data structures and algorithms. [cite: 21]",
+                    "Simplified complex technical topics for diverse learning styles in the CS Lab. [cite: 22]",
+                ],
+            },
         ],
     },
 ];
@@ -39,78 +45,149 @@ const experiences = [
 
 <section
     id="experience"
-    class="relative isolate overflow-hidden py-32 border-t border-text/5"
+    class="relative py-32 border-t border-text/5 overflow-hidden"
 >
-    <div
-        class="watermark left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden"
-        style="transform: translate(-50%, -50%);"
-    >
-        {"$"}
-    </div>
-
-    <div
-        class="hidden md:block watermark left-0"
-        style="transform: translate(25%, 20%);"
-    >
+    <div class="watermark left-0" style="transform: translate(20%, 20%);">
         {"~"}
     </div>
-    <div
-        class="hidden md:block watermark right-0"
-        style="transform: translate(-25%, 40%);"
-    >
-        {"$"}
-    </div>
 
-    <div class="max-w-6xl mx-auto px-6 relative z-10">
-        <div class="mb-16">
-            <h2 class="text-2xl font-mono text-accent mb-2">/Experience</h2>
-            <p class="font-mono opacity-50 tracking-tight">
-                // Professional lifecycle and technical contributions
-            </p>
+    <div class="max-w-4xl mx-auto px-6 relative">
+        <div class="mb-20 space-y-4">
+            <h2 class="text-2xl font-mono text-accent">/Experience</h2>
+            <div class="flex items-center gap-4">
+                <a
+                    href="/Jose_Richiez_Resume.pdf"
+                    download
+                    class="label-caps border border-accent/20 px-4 py-2 hover:bg-accent/5 transition-all flex items-center gap-2 text-[10px]"
+                >
+                    <span class="text-accent opacity-50">GET</span> resume.bin ↓
+                </a>
+            </div>
         </div>
 
-        <div class="space-y-24">
+        <div
+            class="relative border-l border-text/10 ml-4 md:ml-8 pl-8 md:pl-12 space-y-24"
+        >
             {
-                experiences.map((job) => (
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 group">
-                        <div class="md:col-span-3">
-                            <span class="font-mono text-sm text-accent opacity-80">
-                                {job.period}
-                            </span>
-                        </div>
+                experiences.map((node) => (
+                    <div class="relative group">
+                        <div class="absolute -left-[33px] md:-left-[49px] top-4 w-8 md:w-12 h-px bg-text/10" />
+                        <div class="absolute -left-[37px] md:-left-[53px] top-[13px] w-2 h-2 rounded-full border border-text/20 bg-background group-hover:border-accent transition-all" />
 
-                        <div class="md:col-span-9 space-y-4">
-                            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2">
-                                <h3 class="text-xl font-mono text-text">
-                                    {job.role}{" "}
-                                    <span class="text-accent/40 text-sm">
-                                        @ {job.company}
+                        {node.isRoot ? (
+                            /* Workplace Progress Branch (SMSU) */
+                            <div class="space-y-12">
+                                <div class="flex items-center gap-4">
+                                    <span class="font-mono text-[10px] text-accent opacity-50">
+                                        [dir]
                                     </span>
-                                </h3>
-                                {job.project && (
-                                    <span class="label-caps text-accent/60 italic">
-                                        {job.project}
-                                    </span>
-                                )}
+                                    <h3 class="text-xl font-mono text-accent">
+                                        {node.company}
+                                    </h3>
+                                </div>
+
+                                <div class="ml-2 border-l border-accent/20 pl-8 space-y-16">
+                                    {node.roles.map((subRole) => (
+                                        <div class="relative">
+                                            <div class="absolute -left-[33px] top-3 w-6 h-px bg-accent/20" />
+                                            <div class="space-y-3">
+                                                <div class="flex items-center gap-3">
+                                                    <h4 class="text-lg font-mono">
+                                                        {subRole.role}
+                                                    </h4>
+                                                    {subRole.url && (
+                                                        <a
+                                                            href={subRole.url}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            class="px-2 py-0.5 border border-accent/30 text-accent font-mono text-[9px] hover:bg-accent/10 transition-all flex items-center gap-1.5"
+                                                        >
+                                                            <span class="opacity-50">
+                                                                HTTP
+                                                            </span>{" "}
+                                                            VISIT ↗
+                                                        </a>
+                                                    )}
+                                                </div>
+                                                <p class="font-mono text-[10px] opacity-40 uppercase tracking-widest">
+                                                    {subRole.period}
+                                                </p>
+                                                <ul class="space-y-2 max-w-xl">
+                                                    {subRole.details.map(
+                                                        (detail) => (
+                                                            <li class="font-mono text-sm opacity-70 flex gap-3">
+                                                                <span class="text-accent/30">
+                                                                    ├─
+                                                                </span>{" "}
+                                                                {detail}
+                                                            </li>
+                                                        ),
+                                                    )}
+                                                </ul>
+                                                <div class="flex gap-2 pt-2">
+                                                    {subRole.stack.map(
+                                                        (tech) => (
+                                                            <span class="px-2 py-0.5 bg-text/5 border border-text/10 font-mono text-[9px] opacity-50 uppercase">
+                                                                {tech}
+                                                            </span>
+                                                        ),
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-
-                            <ul class="space-y-3 opacity-70">
-                                {job.details.map((detail) => (
-                                    <li class="font-mono text-sm leading-relaxed flex gap-3">
-                                        <span class="text-accent">→</span>
-                                        {detail}
-                                    </li>
-                                ))}
-                            </ul>
-
-                            <div class="flex flex-wrap gap-2 pt-2">
-                                {job.stack.map((skill) => (
-                                    <span class="px-2 py-0.5 bg-text/5 border border-text/10 rounded-sm font-mono text-[10px] uppercase opacity-60">
-                                        {skill}
+                        ) : (
+                            <div class="space-y-4">
+                                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                                    <span class="font-mono text-[10px] text-accent opacity-50">
+                                        [node]
                                     </span>
-                                ))}
+                                    <div class="flex items-center gap-3">
+                                        <h3 class="text-xl font-mono">
+                                            {node.role}
+                                        </h3>
+                                        <span class="font-mono text-xs opacity-40">
+                                            @ {node.company}
+                                        </span>
+                                        {node.url && (
+                                            <a
+                                                href={node.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="px-2 py-0.5 border border-accent/30 text-accent font-mono text-[9px] hover:bg-accent/10 transition-all flex items-center gap-1.5"
+                                            >
+                                                <span class="opacity-50">
+                                                    HTTP
+                                                </span>{" "}
+                                                VISIT ↗
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
+                                <p class="font-mono text-[10px] text-accent/60 uppercase tracking-widest">
+                                    {node.period}
+                                </p>
+                                <ul class="space-y-3 max-w-2xl">
+                                    {node.details.map((detail) => (
+                                        <li class="font-mono text-sm opacity-70 flex gap-3">
+                                            <span class="text-accent/30">
+                                                ├─
+                                            </span>{" "}
+                                            {detail}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div class="flex gap-2 pt-2">
+                                    {node.stack.map((tech) => (
+                                        <span class="px-2 py-0.5 bg-text/5 border border-text/10 font-mono text-[9px] opacity-50 uppercase">
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 ))
             }
