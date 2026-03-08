@@ -1,0 +1,72 @@
+---
+interface Props {
+    href?: string;
+    type?: "submit" | "button";
+    label: string;
+    sublabel?: string;
+    class?: string;
+    variant?: "default" | "primary";
+}
+
+const {
+    href,
+    type,
+    label,
+    sublabel,
+    class: className,
+    variant = "default",
+} = Astro.props;
+const Element = href ? "a" : "button";
+
+const isPrimary = variant === "primary";
+---
+
+<Element
+    href={href}
+    type={!href ? type : undefined}
+    class:list={[
+        "group flex items-center gap-4 px-6 py-4 border transition-all duration-300 no-underline",
+        !isPrimary && "border-text/10 bg-white/2 hover:bg-accent-soft ",
+        isPrimary &&
+            "border-accent/40 bg-accent/5 hover:bg-accent/10 hover:border-accent shadow-[0_0_20px_rgba(var(--accent-rgb),0.1)]",
+        className,
+    ]}
+>
+    <div class="flex flex-col items-start">
+        <span
+            class:list={[
+                "text-sm font-mono transition-colors",
+                !isPrimary && "text-text group-hover:text-accent",
+                isPrimary && "text-accent font-bold",
+            ]}
+        >
+            {label}
+        </span>
+
+        {
+            sublabel && (
+                <span
+                    class:list={[
+                        "text-[9px] font-mono tracking-tighter italic uppercase",
+                        !isPrimary && "opacity-30",
+                        isPrimary && "text-accent/60",
+                    ]}
+                >
+                    {sublabel}
+                </span>
+            )
+        }
+    </div>
+
+    <span
+        class:list={[
+            "ml-auto font-mono transition-all",
+            !isPrimary &&
+                "opacity-0 group-hover:opacity-100 group-hover:translate-x-1 text-accent",
+            isPrimary &&
+                "opacity-100 translate-x-0 group-hover:translate-x-1 text-accent",
+        ]}
+    >
+        &gt;
+    </span>
+</Element>
