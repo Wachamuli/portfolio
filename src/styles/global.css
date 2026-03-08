@@ -89,10 +89,15 @@
         line-height: 1.6;
     }
 
-    a,
-    button {
-        @apply cursor-pointer;
+    a {
+        @apply cursor-pointer underline-offset-8 decoration-accent/20;
         transition: all var(--transition-standard);
+        text-decoration: underline;
+    }
+
+    a:hover {
+        @apply text-accent decoration-accent;
+        text-shadow: 0 0 12px oklch(from var(--color-accent) l c h / 0.2);
     }
 
     button {
