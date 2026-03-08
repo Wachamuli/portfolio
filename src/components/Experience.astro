@@ -32,7 +32,7 @@ const experiences: ExperienceNode[] = [
         id: "01",
         label: "node_health_one",
         role: "Full-Stack Web Developer",
-        url: "https://www.roca-panel.com",
+        url: "https://roca-panel.com",
         company: "Health One",
         period: "2025.01 — 2026.02",
         stack: ["Next.js", "AWS", "SQL"],
@@ -51,7 +51,7 @@ const experiences: ExperienceNode[] = [
                 role: "Full-Stack Web Developer",
                 url: "https://rebuild2reintegrate.com",
                 period: "2025.01 — 2025.12",
-                stack: ["Astro.js", "Supabase", "GitHub Actions"],
+                stack: ["React", "Astro.js", "Supabase", "GitHub Actions"],
                 details: [
                     "Led end-to-end development of the Rebuild2Reintegrate project.",
                     "Architected CI/CD pipelines for seamless Deno Deploy integration.",
@@ -79,20 +79,44 @@ const experiences: ExperienceNode[] = [
         {"~"}
     </div>
 
-    <div class="max-w-4xl mx-auto px-6 relative">
-        <div class="mb-20 space-y-4">
+    <div
+        class="max-w-6xl mx-auto px-6 mb-24 grid grid-cols-1 md:grid-cols-2 gap-16 items-end"
+    >
+        <div class="space-y-4">
             <h2 class="text-2xl font-mono text-accent">/Experience</h2>
-            <div class="flex items-center gap-4">
-                <a
-                    href="/Systems-Engineer-Resume-Jose-Richiez.pdf"
-                    download
-                    class="label-caps border border-accent/20 px-4 py-2 hover:bg-accent/5 transition-all flex items-center gap-2 text-[10px]"
-                >
-                    <span class="text-accent opacity-50">GET</span> resume.pdf ↓
-                </a>
-            </div>
+            <p class="font-mono opacity-50 tracking-tight">
+                // Professional lifecycle and technical contributions
+            </p>
         </div>
 
+        <div class="flex flex-col md:items-end gap-4">
+            <span class="label-caps text-accent/50 text-[10px]"
+                >Export_Artifact</span
+            >
+            <a
+                href="/Systems-Engineer-Resume-Jose-Richiez.pdf"
+                download
+                class="group w-fit label-caps border border-accent/20 px-6 py-3 hover:bg-accent/5 transition-all flex items-center gap-4 text-xs no-underline"
+            >
+                <div class="flex flex-col items-start">
+                    <span
+                        class="text-text group-hover:text-accent transition-colors font-mono"
+                        >GET resume.pdf</span
+                    >
+                    <span
+                        class="text-[9px] opacity-30 font-mono tracking-tighter italic"
+                        >SHA256: 5F4DCC3B...</span
+                    >
+                </div>
+                <span
+                    class="text-accent group-hover:translate-y-0.5 transition-transform"
+                    >↓</span
+                >
+            </a>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-6 relative">
         <div
             class="relative border-l border-text/10 ml-4 md:ml-8 pl-8 md:pl-12 space-y-24"
         >
@@ -127,7 +151,7 @@ const experiences: ExperienceNode[] = [
                                                             href={subRole.url}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            class="px-2 py-0.5 border border-accent/30 text-accent font-mono text-[9px] hover:bg-accent/10 transition-all flex items-center gap-1.5"
+                                                            class="px-2 py-0.5 border border-accent/30 text-accent font-mono text-[9px] hover:bg-accent/10 transition-all flex items-center gap-1.5 no-underline"
                                                         >
                                                             <span class="opacity-50">
                                                                 HTTP
@@ -151,7 +175,7 @@ const experiences: ExperienceNode[] = [
                                                         ),
                                                     )}
                                                 </ul>
-                                                <div class="flex gap-2 pt-2">
+                                                <div class="flex flex-wrap gap-2 pt-2">
                                                     {subRole.stack.map(
                                                         (tech) => (
                                                             <span class="px-2 py-0.5 bg-text/5 border border-text/10 font-mono text-[9px] opacity-50 uppercase">
@@ -175,15 +199,12 @@ const experiences: ExperienceNode[] = [
                                         <h3 class="text-xl font-mono">
                                             {node.role}
                                         </h3>
-                                        <span class="font-mono text-xs opacity-40">
-                                            @ {node.company}
-                                        </span>
                                         {node.url && (
                                             <a
                                                 href={node.url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                class="px-2 py-0.5 border border-accent/30 text-accent font-mono text-[9px] hover:bg-accent/10 transition-all flex items-center gap-1.5"
+                                                class="px-2 py-0.5 border border-accent/30 text-accent font-mono text-[9px] hover:bg-accent/10 transition-all flex items-center gap-1.5 no-underline"
                                             >
                                                 <span class="opacity-50">
                                                     HTTP
@@ -193,8 +214,8 @@ const experiences: ExperienceNode[] = [
                                         )}
                                     </div>
                                 </div>
-                                <p class="font-mono text-[10px] text-accent/60 uppercase tracking-widest">
-                                    {node.period}
+                                <p class="font-mono text-xs opacity-40">
+                                    @ {node.company} // {node.period}
                                 </p>
                                 <ul class="space-y-3 max-w-2xl">
                                     {node.details.map((detail) => (
@@ -206,7 +227,7 @@ const experiences: ExperienceNode[] = [
                                         </li>
                                     ))}
                                 </ul>
-                                <div class="flex gap-2 pt-2">
+                                <div class="flex flex-wrap gap-2 pt-2">
                                     {node.stack.map((tech) => (
                                         <span class="px-2 py-0.5 bg-text/5 border border-text/10 font-mono text-[9px] opacity-50 uppercase">
                                             {tech}
