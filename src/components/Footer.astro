@@ -1,0 +1,89 @@
+---
+import MediaLink from "./MediaLink.astro";
+---
+
+<footer
+    class="border-t border-text/10 py-16 bg-background relative isolate overflow-hidden"
+>
+    <div class="watermark">EOF</div>
+
+    <div class="max-w-6xl mx-auto px-6">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16"
+        >
+            <div class="space-y-4">
+                <span class="label-caps text-accent">Network_Nodes</span>
+                <div class="font-mono text-xs">
+                    <MediaLink
+                        href="https://github.com/Wachamuli"
+                        label="Wachamuli"
+                        media="Github"
+                    />
+                    <MediaLink
+                        href="https://www.linkedin.com/in/joserichiez/"
+                        label="joserichiez"
+                        media="linkedin"
+                    />
+                    <MediaLink
+                        href="mailto:hello@joserichiez.com"
+                        label="hello@joserichiez.com"
+                        media="email"
+                    />
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <span class="label-caps text-accent">Site_Map</span>
+                <div class="grid grid-cols-2 gap-2">
+                    <a
+                        href="#projects"
+                        class="font-mono text-xs hover:text-accent transition-standard"
+                        >~/projects</a
+                    >
+                    <a
+                        href="#contact"
+                        class="font-mono text-xs hover:text-accent transition-standard"
+                        >~/contact</a
+                    >
+                    <a
+                        href="#support"
+                        class="font-mono text-xs hover:text-accent transition-standard"
+                        >~/support</a
+                    >
+                    <a
+                        href="/"
+                        class="font-mono text-xs hover:text-accent transition-standard"
+                        >~/home</a
+                    >
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <span class="label-caps text-accent">Origin_Info</span>
+                <p class="font-mono text-xs leading-relaxed opacity-70">
+                    Jose Manuel Richiez Rijo<br />
+                    Computer & Data Scientist
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <span class="label-caps text-accent">Region_Encoding</span>
+                <p class="font-mono text-xs opacity-70">
+                    ISO_3166: 214<br />
+                    HEX_ID: 0x5244<br />
+                    EST: 1844
+                </p>
+            </div>
+        </div>
+
+        <div
+            class="pt-8 border-t border-text/5 flex justify-between items-center text-[10px] font-mono opacity-40"
+        >
+            <span>VERSION: 2026.03.07</span>
+            <span class="hidden md:inline uppercase tracking-widest"
+                >Environment: Production // Local-First Ready</span
+            >
+            <span>UTF-8 // [NO_TRACKING]</span>
+        </div>
+    </div>
+</footer>
