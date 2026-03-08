@@ -1,0 +1,71 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+---
+
+<section class="relative overflow-hidden py-32 border-t border-text/5">
+    <div class="watermark">{"{}"}</div>
+
+    <div class="max-w-6xl mx-auto px-6">
+        <div
+            class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+        >
+            <div>
+                <h2 class="text-2xl font-mono text-accent mb-2">/Projects</h2>
+                <p class="font-mono opacity-50 tracking-tight">
+                    // Selected builds: focus on performance and systems
+                    architecture
+                </p>
+            </div>
+
+            <a
+                href="https://github.com/Wachamuli"
+                class="group flex items-center gap-2 no-underline"
+            >
+                <span class="text-xs label-caps text-accent"
+                    >View_Full_Archive</span
+                >
+                <span
+                    class="text-accent group-hover:translate-x-1 transition-transform duration-200"
+                    >→</span
+                >
+            </a>
+        </div>
+
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
+        >
+            <ProjectCard
+                name="Lucien"
+                tag="System_Tool"
+                description="A lightweight Wayland launcher optimized for zero perceived latency. Achieved a 67.5% reduction in syscall overhead through manual implementation of core protocols in Rust."
+                actions={[
+                    { href: "#", label: "[view_source]" },
+                    { href: "#", label: "[performance_metrics]" },
+                ]}
+            />
+            <ProjectCard
+                name="Green Residential"
+                tag="Full_Stack"
+                description="Cross-platform service booking application built with React Native and Supabase. Features a highly scalable PostgreSQL backend."
+                actions={[{ href: "#", label: "[view_source]" }]}
+            />
+            <ProjectCard
+                name="Morpheus"
+                tag="Local_First"
+                description="Morpheus is a custom-built desktop environment designed to transform barebones Wayland compositors into a fully functional workstation."
+                actions={[{ href: "#", label: "[view_source]" }]}
+            />
+        </div>
+
+        <div
+            class="mt-20 pt-8 border-t border-text/10 flex justify-center lg:hidden"
+        >
+            <a
+                href="https://github.com/Wachamuli"
+                class="label-caps text-accent border border-accent/20 px-6 py-3 rounded-md hover:bg-accent/5 transition-standard"
+            >
+                [ + more_on_github ]
+            </a>
+        </div>
+    </div>
+</section>
