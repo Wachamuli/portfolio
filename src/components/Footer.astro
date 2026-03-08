@@ -5,7 +5,7 @@ import MediaLink from "./MediaLink.astro";
 <footer
     class="border-t border-text/10 py-16 bg-background relative isolate overflow-hidden"
 >
-    <div class="watermark">EOF</div>
+    <div class="watermark right-72 top-40 text-7xl">EOF</div>
 
     <div class="max-w-6xl mx-auto px-6">
         <div
@@ -77,13 +77,24 @@ import MediaLink from "./MediaLink.astro";
         </div>
 
         <div
-            class="pt-8 border-t border-text/5 flex justify-between items-center text-[10px] font-mono opacity-40"
+            class="pt-8 border-t border-text/5 flex justify-between items-center text-[10px] font-mono"
         >
-            <span>VERSION: 2026.03.07</span>
-            <span class="hidden md:inline uppercase tracking-widest"
-                >Environment: Production // Local-First Ready</span
+            <span class="opacity-70">VERSION: 2026.03.07</span>
+            <div class="flex items-center gap-2 uppercase">
+                <span class="relative flex h-1.5 w-1.5">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent"
+                    ></span>
+                    <span
+                        class="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent"
+                    ></span>
+                </span>
+                <span class="label-caps text-accent"> system status:</span>
+                <span>online</span>
+            </div>
+            <span class="hidden md:inline uppercase tracking-widest opacity-70"
+                >UTF-8 // [NO_TRACKING]</span
             >
-            <span>UTF-8 // [NO_TRACKING]</span>
         </div>
     </div>
 </footer>
