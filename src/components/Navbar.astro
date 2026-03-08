@@ -1,66 +1,80 @@
+---
+const routes = ["experience", "projects", "contact", "support"];
+---
+
 <nav
-    class="fixed top-0 left-0 w-full z-50 border-b border-text/10 bg-background/80 backdrop-blur-md"
+    class="fixed top-0 left-0 w-full z-50 border-b border-text/5 bg-background/70 backdrop-blur-lg"
 >
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div
+        class="max-w-7xl mx-auto px-8 md:px-12 h-20 flex items-center justify-between"
+    >
         <a
             href="#"
-            class="font-mono text-sm tracking-tighter hover:text-accent transition-standard no-underline"
+            class="font-mono text-base tracking-tighter hover:text-accent transition-standard no-underline"
         >
             jose_richiez<span class="text-accent">.rijo</span>
         </a>
 
-        <div id="nav-links" class="flex gap-8">
-            <a
-                href="#projects"
-                data-section="projects"
-                class="label-caps hover:text-accent transition-standard no-underline"
-            >
-                /Projects
-            </a>
-            <a
-                href="#contact"
-                data-section="contact"
-                class="label-caps hover:text-accent transition-standard no-underline"
-            >
-                /Contact
-            </a>
-            <a
-                href="#support"
-                data-section="support"
-                class="label-caps hover:text-accent transition-standard no-underline"
-            >
-                /Support
-            </a>
+        <div id="nav-links-desktop" class="hidden md:flex gap-10">
+            {
+                routes.map((route) => (
+                    <a
+                        href={`#${route}`}
+                        data-section={route}
+                        class="nav-link label-caps hover:text-accent transition-standard no-underline opacity-60"
+                    >
+                        {`/${route}`}
+                    </a>
+                ))
+            }
         </div>
     </div>
 </nav>
 
+<div
+    class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 md:hidden w-[min(400px,90%)]"
+>
+    <div
+        id="nav-links-mobile"
+        class="flex justify-around items-center bg-background/40 backdrop-blur-2xl border border-white/5 rounded-2xl px-2 py-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/10"
+    >
+        {
+            routes.map((route) => (
+                <a
+                    href={`#${route}`}
+                    data-section={route}
+                    class="nav-link text-[11px] font-mono uppercase tracking-tighter hover:text-accent no-underline opacity-50 transition-all duration-300 px-4 py-1"
+                >
+                    {`/${route}`}
+                </a>
+            ))
+        }
+    </div>
+</div>
+
 <script>
-    const navLinks = document.querySelectorAll("#nav-links a");
+    const navLinks = document.querySelectorAll(".nav-link");
     const sections = document.querySelectorAll("section[id]");
 
-    const options = {
-        rootMargin: "-20% 0px -40% 0px",
-        threshold: 0,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute("id");
-
-                navLinks.forEach((link) => {
-                    link.classList.remove("text-accent", "opacity-100");
-                    link.classList.add("opacity-50");
-
-                    if (link.getAttribute("data-section") === id) {
-                        link.classList.add("text-accent", "opacity-100");
-                        link.classList.remove("opacity-50");
-                    }
-                });
-            }
-        });
-    }, options);
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute("id");
+                    navLinks.forEach((link) => {
+                        const active = link.getAttribute("data-section") === id;
+                        link.classList.toggle("text-accent", active);
+                        link.classList.toggle("opacity-100", active);
+                        link.classList.toggle("opacity-50", !active);
+                        // Add a slight scale effect for the active mobile link
+                        if (active) link.classList.add("scale-110");
+                        else link.classList.remove("scale-110");
+                    });
+                }
+            });
+        },
+        { rootMargin: "-30% 0px -30% 0px" },
+    );
 
     sections.forEach((section) => observer.observe(section));
 </script>
