@@ -1,0 +1,66 @@
+<nav
+    class="fixed top-0 left-0 w-full z-50 border-b border-text/10 bg-background/80 backdrop-blur-md"
+>
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a
+            href="#"
+            class="font-mono text-sm tracking-tighter hover:text-accent transition-standard no-underline"
+        >
+            jose_richiez<span class="text-accent">.rijo</span>
+        </a>
+
+        <div id="nav-links" class="flex gap-8">
+            <a
+                href="#projects"
+                data-section="projects"
+                class="label-caps hover:text-accent transition-standard no-underline"
+            >
+                /Projects
+            </a>
+            <a
+                href="#contact"
+                data-section="contact"
+                class="label-caps hover:text-accent transition-standard no-underline"
+            >
+                /Contact
+            </a>
+            <a
+                href="#support"
+                data-section="support"
+                class="label-caps hover:text-accent transition-standard no-underline"
+            >
+                /Support
+            </a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const navLinks = document.querySelectorAll("#nav-links a");
+    const sections = document.querySelectorAll("section[id]");
+
+    const options = {
+        rootMargin: "-20% 0px -40% 0px",
+        threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute("id");
+
+                navLinks.forEach((link) => {
+                    link.classList.remove("text-accent", "opacity-100");
+                    link.classList.add("opacity-50");
+
+                    if (link.getAttribute("data-section") === id) {
+                        link.classList.add("text-accent", "opacity-100");
+                        link.classList.remove("opacity-50");
+                    }
+                });
+            }
+        });
+    }, options);
+
+    sections.forEach((section) => observer.observe(section));
+</script>
