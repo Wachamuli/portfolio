@@ -32,10 +32,10 @@ const routes = ["experience", "projects", "contact", "support"];
 </nav>
 
 <div
-    class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 md:hidden w-[min(400px,90%)]"
+    id="mobile-dock"
+    class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 md:hidden w-[min(400px,90%)] transition-all duration-500 ease-in-out"
 >
     <div
-        id="nav-links-mobile"
         class="flex justify-around items-center bg-background/40 backdrop-blur-2xl border border-white/5 rounded-2xl px-2 py-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/10"
     >
         {
@@ -55,6 +55,7 @@ const routes = ["experience", "projects", "contact", "support"];
 <script>
     const navLinks = document.querySelectorAll(".nav-link");
     const sections = document.querySelectorAll("section[id]");
+    const mobileDock = document.getElementById("mobile-dock");
 
     const observer = new IntersectionObserver(
         (entries) => {
@@ -66,7 +67,7 @@ const routes = ["experience", "projects", "contact", "support"];
                         link.classList.toggle("text-accent", active);
                         link.classList.toggle("opacity-100", active);
                         link.classList.toggle("opacity-50", !active);
-                        // Add a slight scale effect for the active mobile link
+
                         if (active) link.classList.add("scale-110");
                         else link.classList.remove("scale-110");
                     });
@@ -77,4 +78,23 @@ const routes = ["experience", "projects", "contact", "support"];
     );
 
     sections.forEach((section) => observer.observe(section));
+
+    window.addEventListener("scroll", () => {
+        const scrollPosition = window.innerHeight + window.scrollY;
+        const threshold = document.documentElement.scrollHeight - 50;
+
+        if (scrollPosition >= threshold) {
+            mobileDock?.classList.add(
+                "translate-y-20",
+                "opacity-0",
+                "pointer-events-none",
+            );
+        } else {
+            mobileDock?.classList.remove(
+                "translate-y-20",
+                "opacity-0",
+                "pointer-events-none",
+            );
+        }
+    });
 </script>
