@@ -1,5 +1,33 @@
 ---
-const experiences = [
+interface BaseExperience {
+    id: string;
+    label: string;
+    company: string;
+}
+
+interface StandardExperience extends BaseExperience {
+    isRoot?: false;
+    role: string;
+    url?: string;
+    period: string;
+    stack: string[];
+    details: string[];
+}
+
+interface RootExperience extends BaseExperience {
+    isRoot: true;
+    roles: {
+        role: string;
+        url?: string;
+        period: string;
+        stack: string[];
+        details: string[];
+    }[];
+}
+
+type ExperienceNode = StandardExperience | RootExperience;
+
+const experiences: ExperienceNode[] = [
     {
         id: "01",
         label: "node_health_one",
@@ -9,8 +37,8 @@ const experiences = [
         period: "2025.01 — 2026.02",
         stack: ["Next.js", "AWS", "SQL"],
         details: [
-            "Architected relational database schema and back-end logic for AWS scalability. [cite: 10]",
-            "Developed real-time Alert Notification and Payment Tracking modules. [cite: 11]",
+            "Architected relational database schema and back-end logic for AWS scalability.",
+            "Developed real-time Alert Notification and Payment Tracking modules.",
         ],
     },
     {
@@ -25,8 +53,8 @@ const experiences = [
                 period: "2025.01 — 2025.12",
                 stack: ["Astro.js", "Supabase", "GitHub Actions"],
                 details: [
-                    "Led end-to-end development of the Rebuild2Reintegrate project. [cite: 15]",
-                    "Architected CI/CD pipelines for seamless Deno Deploy integration. [cite: 16]",
+                    "Led end-to-end development of the Rebuild2Reintegrate project.",
+                    "Architected CI/CD pipelines for seamless Deno Deploy integration.",
                 ],
             },
             {
@@ -34,8 +62,8 @@ const experiences = [
                 period: "2024.09 — 2025.12",
                 stack: ["Linux", "Python", "Bash"],
                 details: [
-                    "Provided tutoring in foundational CS courses including data structures and algorithms. [cite: 21]",
-                    "Simplified complex technical topics for diverse learning styles in the CS Lab. [cite: 22]",
+                    "Provided tutoring in foundational CS courses including data structures and algorithms.",
+                    "Simplified complex technical topics for diverse learning styles in the CS Lab.",
                 ],
             },
         ],
@@ -71,11 +99,10 @@ const experiences = [
             {
                 experiences.map((node) => (
                     <div class="relative group">
-                        <div class="absolute -left-8.25 md:-left-12.25 top-4 w-8 md:w-12 h-px bg-text/10" />
-                        <div class="absolute -left-9.25 md:-left-13.25 top-3.25 w-2 h-2 rounded-full border border-text/20 bg-background group-hover:border-accent transition-all" />
+                        <div class="absolute -left-[33px] md:-left-[49px] top-4 w-8 md:w-12 h-px bg-text/10" />
+                        <div class="absolute -left-[37px] md:-left-[53px] top-[13px] w-2 h-2 rounded-full border border-text/20 bg-background group-hover:border-accent transition-all" />
 
                         {node.isRoot ? (
-                            /* Workplace Progress Branch (SMSU) */
                             <div class="space-y-12">
                                 <div class="flex items-center gap-4">
                                     <span class="font-mono text-[10px] text-accent opacity-50">
@@ -89,7 +116,7 @@ const experiences = [
                                 <div class="ml-2 border-l border-accent/20 pl-8 space-y-16">
                                     {node.roles.map((subRole) => (
                                         <div class="relative">
-                                            <div class="absolute -left-8.25 top-3 w-6 h-px bg-accent/20" />
+                                            <div class="absolute -left-[33px] top-3 w-6 h-px bg-accent/20" />
                                             <div class="space-y-3">
                                                 <div class="flex items-center gap-3">
                                                     <h4 class="text-lg font-mono">
