@@ -3,111 +3,115 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-    <section class="p-8 max-w-4xl mx-auto space-y-12">
-        <div class="space-y-6 border-b pb-8 border-background">
-            <h1 class="text-4xl text-accent">Lilex Fluid Header 1</h1>
-
-            <h2 class="text-2xl">Fluid Header 2</h2>
-
-            <p>
-                This is your <span class="text-accent font-bold"
-                    >Inter Sans</span
-                > body text. It's optimized for reading technical documentation. Because
-                of your base styles, this paragraph will never exceed a comfortable
-                reading width, maintaining perfect vertical rhythm.
-            </p>
-
-            <div class="flex items-center gap-4">
-                <code
-                    class="font-mono bg-background px-2 py-1 rounded text-accent border border-accent/10"
-                >
-                    {"fn optimize_boot_time() -> u32 {16}"}
-                </code>
-                <span class="text-xs font-mono text-text/50"
-                    >// Optimized for Wayland</span
-                >
-            </div>
-        </div>
-
-        <div class="space-y-4">
-            <h3 class="text-sm uppercase tracking-widest text-text/50">
-                System Palette
-            </h3>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                <div class="space-y-2">
-                    <div
-                        class="aspect-square rounded-lg bg-accent shadow-lg shadow-accent/20"
-                    >
+    <section
+        class="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-16"
+    >
+        <div class="flex flex-col gap-8">
+            <h2 class="text-2xl font-mono text-accent">/Contact</h2>
+            <form action="#" class="flex flex-col gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-2">
+                        <label
+                            class="font-mono text-[10px] uppercase tracking-[0.2em] text-accent"
+                            >/Subject</label
+                        >
+                        <input
+                            type="text"
+                            placeholder="refactor: improve-system-latency"
+                            class="bg-text/5 border border-text/10 rounded-sm p-3 font-mono text-sm focus:border-accent outline-none transition-standard"
+                        />
                     </div>
-                    <span class="font-mono text-xs block text-center"
-                        >Accent</span
-                    >
-                </div>
-                <div class="space-y-2">
-                    <div
-                        class="aspect-square rounded-lg bg-accent-soft border border-accent/20"
-                    >
+                    <div class="flex flex-col gap-2">
+                        <label
+                            class="font-mono text-[10px] uppercase tracking-[0.2em] text-accent"
+                            >/Return_Path</label
+                        >
+                        <input
+                            type="email"
+                            placeholder="dev@null.local"
+                            class="bg-text/5 border border-text/10 rounded-sm p-3 font-mono text-sm focus:border-accent outline-none transition-standard"
+                        />
                     </div>
-                    <span class="font-mono text-xs block text-center"
-                        >Soft Accent</span
-                    >
                 </div>
-                <div class="space-y-2">
-                    <div
-                        class="aspect-square rounded-lg bg-primary border border-background"
-                    >
-                    </div>
-                    <span class="font-mono text-xs block text-center"
-                        >Surface</span
-                    >
-                </div>
-                <div class="space-y-2">
-                    <div class="aspect-square rounded-lg bg-background"></div>
-                    <span class="font-mono text-xs block text-center"
-                        >Ground</span
-                    >
-                </div>
-                <div class="space-y-2">
-                    <div class="aspect-square rounded-lg bg-text"></div>
-                    <span class="font-mono text-xs block text-center">Ink</span>
-                </div>
-            </div>
-        </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
-            <div
-                class="bg-primary p-6 rounded-xl border border-background shadow-sm space-y-4"
-            >
-                <span
-                    class="bg-accent-soft text-accent font-mono text-[10px] px-2 py-0.5 rounded-full uppercase font-bold border border-accent/10"
-                >
-                    Systems Tool
-                </span>
-                <h4 class="text-xl">Project: Lucien</h4>
-                <p class="text-sm text-text/80">
-                    High-performance launcher built in Rust. Sub-16ms startup
-                    achieved via minimal syscall overhead.
-                </p>
-                <button
-                    class="bg-accent text-primary px-6 py-2 rounded font-bold hover:brightness-110"
-                >
-                    Source Code
+                <div class="flex flex-col gap-2">
+                    <label
+                        class="font-mono text-[10px] uppercase tracking-[0.2em] text-accent"
+                        >/Payload</label
+                    >
+                    <textarea
+                        placeholder="fn init_discussion() { /* Your message here */ }"
+                        rows="5"
+                        class="bg-text/5 border border-text/10 rounded-sm p-3 font-mono text-sm focus:border-accent outline-none transition-standard resize-none"
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="self-start">
+                    Execute Request _
                 </button>
+            </form>
+        </div>
+
+        <div class="flex flex-col gap-8 relative">
+            <div
+                class="absolute -top-10 -right-10 text-text/5 select-none -z-10 font-mono text-9xl"
+            >
+                @
+            </div>
+
+            <div>
+                <h3 class="text-xl font-mono mb-4">Find me</h3>
+                <p class="text-text/80 mb-8">
+                    You can reach out through social networks or use the
+                    specific channels below for project inquiries.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="group">
+                    <h4
+                        class="font-mono text-xs uppercase text-accent tracking-tighter"
+                    >
+                        /Core_Inquiry
+                    </h4>
+                    <p class="text-lg font-sans">hello@wachaout.com</p>
+                </div>
+
+                <div class="group">
+                    <h4
+                        class="font-mono text-xs uppercase text-accent/60 tracking-tighter"
+                    >
+                        /Other_Work
+                    </h4>
+                    <p class="text-lg font-sans opacity-70">
+                        interesting@wachaout.com
+                    </p>
+                </div>
             </div>
 
             <div
-                class="project-img aspect-video flex items-center justify-center group cursor-pointer"
+                class="grid grid-cols-2 gap-4 mt-auto pt-10 border-t border-text/10"
             >
-                <div
-                    class="text-center group-hover:scale-110 transition-transform"
+                <a
+                    href="#"
+                    class="font-mono text-sm hover:text-accent transition-standard"
+                    >GitHub/WachaDev</a
                 >
-                    <p class="font-mono text-accent text-xs">
-                        // Image Placeholder
-                    </p>
-                    <p class="text-[10px] text-text/40">
-                        Hover to see translateY & border-color transition
-                    </p>
-                </div>
+                <a
+                    href="#"
+                    class="font-mono text-sm hover:text-accent transition-standard"
+                    >Twitter/@WachaOut</a
+                >
+                <a
+                    href="#"
+                    class="font-mono text-sm hover:text-accent transition-standard"
+                    >YouTube/Wachamuli</a
+                >
+                <a
+                    href="#"
+                    class="font-mono text-sm hover:text-accent transition-standard"
+                    >IG/@WachaIG</a
+                >
             </div>
         </div>
     </section>

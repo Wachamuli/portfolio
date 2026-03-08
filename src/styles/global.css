@@ -83,14 +83,35 @@
         @apply text-text font-mono tracking-tight;
     }
 
-    a,
-    button {
-        transition: all var(--transition-standard);
-    }
-
     p {
         max-width: 65ch;
         line-height: 1.6;
+    }
+
+    a,
+    button {
+        @apply cursor-pointer;
+        transition: all var(--transition-standard);
+    }
+
+    button {
+        @apply cursor-pointer inline-flex items-center justify-center px-6 py-3 rounded-md font-mono text-sm tracking-tight;
+        background-color: var(--color-accent);
+        color: var(--color-primary);
+        transition: all var(--transition-standard);
+        border: 1px solid transparent;
+    }
+
+    button:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.1);
+        box-shadow: 0 4px 20px oklch(from var(--color-accent) l c h / 0.2);
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 4px;
     }
 }
 
