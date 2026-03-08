@@ -86,18 +86,26 @@
 
     p {
         max-width: 65ch;
-        line-height: 1.6;
+        @apply text-text/80 leading-relaxed;
     }
 
     a {
-        @apply cursor-pointer underline-offset-8 decoration-accent/20;
         transition: all var(--transition-standard);
         text-decoration: underline;
+        @apply cursor-pointer underline-offset-8 decoration-accent/20;
+
+        @variant dark {
+            @apply decoration-accent/40;
+        }
     }
 
     a:hover {
         @apply text-accent decoration-accent;
         text-shadow: 0 0 12px oklch(from var(--color-accent) l c h / 0.2);
+
+        @variant dark {
+            @apply decoration-accent/40;
+        }
     }
 
     button {
