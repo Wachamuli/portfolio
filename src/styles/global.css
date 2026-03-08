@@ -46,6 +46,7 @@
     --font-sans: "Inter", system-ui, sans-serif;
     --font-mono: "Lilex", monospace;
 
+    --text-mini: clamp(0.3rem, 0.95rem + 0.25vw, 1.125rem);
     --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
     --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
     --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
@@ -83,14 +84,40 @@
         @apply text-text font-mono tracking-tight;
     }
 
-    a,
-    button {
-        transition: all var(--transition-standard);
-    }
-
     p {
         max-width: 65ch;
         line-height: 1.6;
+    }
+
+    a {
+        @apply cursor-pointer underline-offset-8 decoration-accent/20;
+        transition: all var(--transition-standard);
+        text-decoration: underline;
+    }
+
+    a:hover {
+        @apply text-accent decoration-accent;
+        text-shadow: 0 0 12px oklch(from var(--color-accent) l c h / 0.2);
+    }
+
+    button {
+        @apply cursor-pointer inline-flex items-center justify-center px-6 py-3 rounded-md font-mono text-sm tracking-tight;
+        background-color: var(--color-accent);
+        color: var(--color-primary);
+        transition: all var(--transition-standard);
+        border: 1px solid transparent;
+    }
+
+    button:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.1);
+        box-shadow: 0 4px 20px oklch(from var(--color-accent) l c h / 0.2);
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 4px;
     }
 }
 
@@ -109,4 +136,13 @@
             box-shadow: 0 0 30px oklch(65% 0.208 25.52 / 0.2);
         }
     }
+}
+
+@utility label-caps {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    line-height: 1;
+    @apply antialiased;
 }
