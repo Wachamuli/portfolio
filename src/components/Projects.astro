@@ -6,7 +6,22 @@ import ProjectCard from "./ProjectCard.astro";
     id="projects"
     class="relative overflow-hidden py-32 border-t border-text/5"
 >
-    <div class="watermark">{"{}"}</div>
+    <div class="watermark left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <span class="xl:hidden">{"{}"}</span>
+    </div>
+
+    <div
+        class="watermark left-0 hidden 2xl:block"
+        style="transform: translate(25%, 30%);"
+    >
+        {"{"}
+    </div>
+    <div
+        class="watermark right-0 hidden 2xl:block"
+        style="transform: translate(-25%, 30%);"
+    >
+        {"}"}
+    </div>
 
     <div class="max-w-6xl mx-auto px-6">
         <div
