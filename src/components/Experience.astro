@@ -1,0 +1,119 @@
+---
+const experiences = [
+    {
+        company: "Health One",
+        role: "Full-Stack Web Developer",
+        project: "Roca Project",
+        period: "Jan 2025 - Feb 2026",
+        stack: ["Next.js", "AWS", "SQL", "Tailwind CSS"],
+        details: [
+            "Architected relational database schema and back-end logic for AWS scalability[cite: 10].",
+            "Engineered real-time Alert Notification and Payment Tracking modules[cite: 11].",
+            "Optimized server-side rendering with Next.js for sub-perceptual latency[cite: 12].",
+        ],
+    },
+    {
+        company: "SMSU",
+        role: "Full-Stack Web Developer",
+        project: "Rebuild2Reintegrate",
+        period: "Jan 2025 - Dec 2025",
+        stack: ["Astro.js", "Supabase", "GitHub Actions", "Deno"],
+        details: [
+            "Led full-cycle development from schema design to automated production[cite: 15].",
+            "Built CI/CD pipelines for seamless deployment to Deno Deploy[cite: 16].",
+            "Designed high-performance UI/UX with Astro.js and Tailwind CSS[cite: 18].",
+        ],
+    },
+    {
+        company: "SMSU CS Lab",
+        role: "Unix Laboratory Assistant",
+        period: "Sep 2024 - Dec 2025",
+        stack: ["Linux", "Python", "JavaScript", "Bash"],
+        details: [
+            "Tutored foundational data structures and algorithms in Unix environments[cite: 21].",
+            "Simplified complex IPC and kernel-level concepts for diverse learners[cite: 22].",
+        ],
+    },
+];
+---
+
+<section
+    id="experience"
+    class="relative isolate overflow-hidden py-32 border-t border-text/5"
+>
+    <div
+        class="watermark left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden"
+        style="transform: translate(-50%, -50%);"
+    >
+        {"$"}
+    </div>
+
+    <div
+        class="hidden md:block watermark left-0"
+        style="transform: translate(25%, 20%);"
+    >
+        {"~"}
+    </div>
+    <div
+        class="hidden md:block watermark right-0"
+        style="transform: translate(-25%, 40%);"
+    >
+        {"$"}
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <div class="mb-16">
+            <h2 class="text-2xl font-mono text-accent mb-2">/Experience</h2>
+            <p class="font-mono opacity-50 tracking-tight">
+                // Professional lifecycle and technical contributions
+            </p>
+        </div>
+
+        <div class="space-y-24">
+            {
+                experiences.map((job) => (
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 group">
+                        <div class="md:col-span-3">
+                            <span class="font-mono text-sm text-accent opacity-80">
+                                {job.period}
+                            </span>
+                        </div>
+
+                        <div class="md:col-span-9 space-y-4">
+                            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2">
+                                <h3 class="text-xl font-mono text-text">
+                                    {job.role}{" "}
+                                    <span class="text-accent/40 text-sm">
+                                        @ {job.company}
+                                    </span>
+                                </h3>
+                                {job.project && (
+                                    <span class="label-caps text-accent/60 italic">
+                                        {job.project}
+                                    </span>
+                                )}
+                            </div>
+
+                            <ul class="space-y-3 opacity-70">
+                                {job.details.map((detail) => (
+                                    <li class="font-mono text-sm leading-relaxed flex gap-3">
+                                        <span class="text-accent">→</span>
+                                        {detail}
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                {job.stack.map((skill) => (
+                                    <span class="px-2 py-0.5 bg-text/5 border border-text/10 rounded-sm font-mono text-[10px] uppercase opacity-60">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
