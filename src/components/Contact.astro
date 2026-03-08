@@ -1,5 +1,6 @@
 ---
 import MediaLink from "./MediaLink.astro";
+import Button from "./Button.astro";
 ---
 
 <section
@@ -37,9 +38,13 @@ import MediaLink from "./MediaLink.astro";
                 ></textarea>
             </div>
 
-            <button type="submit" class="self-start">
-                Execute Request _
-            </button>
+            <Button
+                type="submit"
+                label="POST request"
+                variant="primary"
+                sublabel="STATUS: READY_FOR_UPLOADING"
+                class="w-full md:w-auto"
+            />
         </form>
     </div>
 
