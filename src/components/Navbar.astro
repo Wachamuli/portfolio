@@ -15,18 +15,27 @@ const routes = ["experience", "projects", "contact", "support"];
             jose_richiez<span class="text-accent">.rijo</span>
         </a>
 
-        <div id="nav-links-desktop" class="hidden md:flex gap-10">
-            {
-                routes.map((route) => (
-                    <a
-                        href={`#${route}`}
-                        data-section={route}
-                        class="nav-link label-caps hover:text-accent transition-standard no-underline opacity-60"
-                    >
-                        {`/${route}`}
-                    </a>
-                ))
-            }
+        <div class="flex items-center gap-8">
+            <div id="nav-links-desktop" class="hidden md:flex gap-10">
+                {
+                    routes.map((route) => (
+                        <a
+                            href={`#${route}`}
+                            data-section={route}
+                            class="nav-link label-caps hover:text-accent transition-all no-underline opacity-60"
+                        >
+                            {`/${route}`}
+                        </a>
+                    ))
+                }
+            </div>
+
+            <button
+                id="theme-toggle"
+                class="bg-transparent font-mono text-[11px] uppercase tracking-widest hover:text-accent transition-colors outline-none px-2 opacity-80 hover:opacity-100"
+            >
+                DARK_MODE <span id="theme-char" class="ml-1">[ ]</span>
+            </button>
         </div>
     </div>
 </nav>
@@ -52,24 +61,73 @@ const routes = ["experience", "projects", "contact", "support"];
     </div>
 </div>
 
-<script>
+<script is:inline>
     const navLinks = document.querySelectorAll(".nav-link");
     const sections = document.querySelectorAll("section[id]");
     const mobileDock = document.getElementById("mobile-dock");
+    const themeButtons = [
+        document.getElementById("theme-toggle"),
+        document.getElementById("theme-toggle-mobile"),
+    ];
+    const themeChars = [
+        document.getElementById("theme-char"),
+        document.getElementById("theme-char-mobile"),
+    ];
+
+    const setTheme = (theme) => {
+        const isDark = theme === "dark";
+        document.documentElement.classList.toggle("dark", isDark);
+        localStorage.setItem("theme", theme);
+
+        themeChars.forEach((el) => {
+            if (el) el.innerText = isDark ? "[x]" : "[ ]";
+        });
+    };
+
+    const getInitialTheme = () => {
+        const saved = localStorage.getItem("theme");
+        if (saved) return saved;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+    };
+
+    // Run on load
+    setTheme(getInitialTheme());
+
+    themeButtons.forEach((btn) =>
+        btn?.addEventListener("click", () => {
+            const nextTheme = document.documentElement.classList.contains(
+                "dark",
+            )
+                ? "light"
+                : "dark";
+            setTheme(nextTheme);
+        }),
+    );
+
+    window.addEventListener("scroll", () => {
+        const atBottom =
+            window.innerHeight + window.scrollY >=
+            document.documentElement.scrollHeight - 60;
+        mobileDock?.classList.toggle("translate-y-24", atBottom);
+        mobileDock?.classList.toggle("opacity-0", atBottom);
+        mobileDock?.classList.toggle("pointer-events-none", atBottom);
+    });
 
     const observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute("id");
+                    const id = entry.target.id;
                     navLinks.forEach((link) => {
                         const active = link.getAttribute("data-section") === id;
                         link.classList.toggle("text-accent", active);
                         link.classList.toggle("opacity-100", active);
                         link.classList.toggle("opacity-50", !active);
-
-                        if (active) link.classList.add("scale-110");
-                        else link.classList.remove("scale-110");
+                        active
+                            ? link.classList.add("scale-110")
+                            : link.classList.remove("scale-110");
                     });
                 }
             });
@@ -77,24 +135,5 @@ const routes = ["experience", "projects", "contact", "support"];
         { rootMargin: "-30% 0px -30% 0px" },
     );
 
-    sections.forEach((section) => observer.observe(section));
-
-    window.addEventListener("scroll", () => {
-        const scrollPosition = window.innerHeight + window.scrollY;
-        const threshold = document.documentElement.scrollHeight - 50;
-
-        if (scrollPosition >= threshold) {
-            mobileDock?.classList.add(
-                "translate-y-20",
-                "opacity-0",
-                "pointer-events-none",
-            );
-        } else {
-            mobileDock?.classList.remove(
-                "translate-y-20",
-                "opacity-0",
-                "pointer-events-none",
-            );
-        }
-    });
+    sections.forEach((s) => observer.observe(s));
 </script>
