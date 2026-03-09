@@ -15,27 +15,36 @@ const routes = ["experience", "projects", "contact", "support"];
             jose_richiez<span class="text-accent">.rijo</span>
         </a>
 
-        <div id="nav-links-desktop" class="hidden md:flex gap-10">
-            {
-                routes.map((route) => (
-                    <a
-                        href={`#${route}`}
-                        data-section={route}
-                        class="nav-link label-caps hover:text-accent transition-standard no-underline opacity-60"
-                    >
-                        {`/${route}`}
-                    </a>
-                ))
-            }
+        <div class="flex items-center gap-20">
+            <div id="nav-links-desktop" class="hidden md:flex gap-10">
+                {
+                    routes.map((route) => (
+                        <a
+                            href={`#${route}`}
+                            data-section={route}
+                            class="nav-link label-caps hover:text-accent transition-all no-underline opacity-60"
+                        >
+                            {`/${route}`}
+                        </a>
+                    ))
+                }
+            </div>
+
+            <button
+                id="theme-toggle"
+                class="bg-transparent font-mono text-[11px] uppercase tracking-widest hover:text-accent transition-colors outline-none px-2 opacity-80 hover:opacity-100"
+            >
+                DARK_MODE <span id="theme-char" class="ml-1">[ ]</span>
+            </button>
         </div>
     </div>
 </nav>
 
 <div
-    class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 md:hidden w-[min(400px,90%)]"
+    id="mobile-dock"
+    class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 md:hidden w-[min(400px,90%)] transition-all duration-500 ease-in-out"
 >
     <div
-        id="nav-links-mobile"
         class="flex justify-around items-center bg-background/40 backdrop-blur-2xl border border-white/5 rounded-2xl px-2 py-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/10"
     >
         {
@@ -55,20 +64,30 @@ const routes = ["experience", "projects", "contact", "support"];
 <script>
     const navLinks = document.querySelectorAll(".nav-link");
     const sections = document.querySelectorAll("section[id]");
+    const mobileDock = document.getElementById("mobile-dock");
+
+    window.addEventListener("scroll", () => {
+        const atBottom =
+            window.innerHeight + window.scrollY >=
+            document.documentElement.scrollHeight - 60;
+        mobileDock?.classList.toggle("translate-y-24", atBottom);
+        mobileDock?.classList.toggle("opacity-0", atBottom);
+        mobileDock?.classList.toggle("pointer-events-none", atBottom);
+    });
 
     const observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute("id");
+                    const id = entry.target.id;
                     navLinks.forEach((link) => {
                         const active = link.getAttribute("data-section") === id;
                         link.classList.toggle("text-accent", active);
                         link.classList.toggle("opacity-100", active);
                         link.classList.toggle("opacity-50", !active);
-                        // Add a slight scale effect for the active mobile link
-                        if (active) link.classList.add("scale-110");
-                        else link.classList.remove("scale-110");
+                        active
+                            ? link.classList.add("scale-110")
+                            : link.classList.remove("scale-110");
                     });
                 }
             });
@@ -76,5 +95,47 @@ const routes = ["experience", "projects", "contact", "support"];
         { rootMargin: "-30% 0px -30% 0px" },
     );
 
-    sections.forEach((section) => observer.observe(section));
+    sections.forEach((s) => observer.observe(s));
+</script>
+
+<script is:inline>
+    const themeButtons = [
+        document.getElementById("theme-toggle"),
+        document.getElementById("theme-toggle-mobile"),
+    ];
+    const themeChars = [
+        document.getElementById("theme-char"),
+        document.getElementById("theme-char-mobile"),
+    ];
+
+    const setTheme = (theme) => {
+        const isDark = theme === "dark";
+        document.documentElement.classList.toggle("dark", isDark);
+        localStorage.setItem("theme", theme);
+
+        themeChars.forEach((el) => {
+            if (el) el.innerText = isDark ? "[x]" : "[ ]";
+        });
+    };
+
+    const getInitialTheme = () => {
+        const saved = localStorage.getItem("theme");
+        if (saved) return saved;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+    };
+
+    setTheme(getInitialTheme());
+
+    themeButtons.forEach((btn) =>
+        btn?.addEventListener("click", () => {
+            const nextTheme = document.documentElement.classList.contains(
+                "dark",
+            )
+                ? "light"
+                : "dark";
+            setTheme(nextTheme);
+        }),
+    );
 </script>

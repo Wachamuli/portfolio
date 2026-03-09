@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
     font-family: "Inter";
@@ -80,7 +81,24 @@
         @apply bg-background text-text font-sans antialiased;
         transition:
             background-color var(--transition-standard),
-            color var(--transition-standard);
+            color var(--transition-standard),
+            border-color var(--transition-standard),
+            text-decoration-color var(--transition-standard),
+            fill var(--transition-standard),
+            stroke var(--transition-standard);
+    }
+
+    nav,
+    div,
+    section,
+    footer,
+    button,
+    a {
+        transition:
+            background-color var(--transition-standard),
+            color var(--transition-standard),
+            border-color var(--transition-standard),
+            opacity var(--transition-standard);
     }
 
     h1,
@@ -107,6 +125,13 @@
         }
     }
 
+    button {
+        @apply cursor-pointer inline-flex items-center justify-center px-6 py-3 rounded-md font-mono text-sm tracking-tight;
+        transition: all var(--transition-standard);
+        border: 1px solid transparent;
+    }
+
+    button:hover,
     a:hover {
         @apply text-accent decoration-accent;
         text-shadow: 0 0 12px oklch(from var(--color-accent) l c h / 0.2);
@@ -114,20 +139,6 @@
         @variant dark {
             @apply decoration-accent/40;
         }
-    }
-
-    button {
-        @apply cursor-pointer inline-flex items-center justify-center px-6 py-3 rounded-md font-mono text-sm tracking-tight;
-        background-color: var(--color-accent);
-        color: var(--color-primary);
-        transition: all var(--transition-standard);
-        border: 1px solid transparent;
-    }
-
-    button:hover {
-        transform: translateY(-1px);
-        filter: brightness(1.1);
-        box-shadow: 0 4px 20px oklch(from var(--color-accent) l c h / 0.2);
     }
 
     button:focus-visible,
@@ -170,4 +181,8 @@
     @variant dark {
         @apply text-accent/15;
     }
+}
+
+@utility portfolio-section {
+    @apply max-w-6xl mx-auto px-6 py-24 relative;
 }
