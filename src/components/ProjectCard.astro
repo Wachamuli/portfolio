@@ -4,18 +4,24 @@ interface Props {
     description: string;
     tag: string;
     actions: { href: string; label: string }[];
+    image: {
+        src: string;
+        alt: string;
+    };
 }
 
-const { name, description, tag, actions } = Astro.props;
+const { name, description, tag, actions, image } = Astro.props;
 ---
 
 <article class="group">
     <div
-        class="project-img mb-6 aspect-video flex items-center justify-center border-text/10 bg-text/2"
+        class="project-img mb-6 aspect-video flex items-center justify-center border border-text/10 bg-text/5 overflow-hidden group"
     >
-        <span class="font-mono text-text/20 uppercase tracking-widest text-sm">
-            // [Optimized_Launcher_Binary]
-        </span>
+        <img
+            src={image.src}
+            alt={image.alt}
+            class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
+        />
     </div>
 
     <div class="flex flex-col gap-4">
