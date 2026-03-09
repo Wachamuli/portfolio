@@ -1,5 +1,6 @@
 ---
 import GithubStars from "./GithubStats.astro";
+import ActionLink from "./ActionLink.astro";
 
 interface Props {
     repo?: string;
@@ -23,7 +24,7 @@ const { name, description, tag, actions, image, repo } = Astro.props;
         <img
             src={image.src}
             alt={image.alt}
-            class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
+            class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
         />
     </div>
 
@@ -68,17 +69,7 @@ const { name, description, tag, actions, image, repo } = Astro.props;
     >
         {
             actions.map((action) => (
-                <a
-                    href={action.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="label-caps text-[11px] text-accent/80 hover:text-accent no-underline transition-colors flex items-center gap-1 group/link"
-                >
-                    {action.label}
-                    <span class="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform">
-                        ↗
-                    </span>
-                </a>
+                <ActionLink href={action.href} label={action.label} />
             ))
         }
     </div>
