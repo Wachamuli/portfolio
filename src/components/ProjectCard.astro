@@ -13,9 +13,9 @@ interface Props {
 const { name, description, tag, actions, image } = Astro.props;
 ---
 
-<article class="group">
+<article class="group flex flex-col h-full transition-colors duration-300 p-2">
     <div
-        class="project-img mb-6 aspect-video flex items-center justify-center border border-text/10 bg-text/5 overflow-hidden group"
+        class="project-img mb-6 aspect-video flex items-center justify-center bg-text/5 overflow-hidden"
     >
         <img
             src={image.src}
@@ -24,30 +24,32 @@ const { name, description, tag, actions, image } = Astro.props;
         />
     </div>
 
-    <div class="flex flex-col gap-4">
-        <div class="flex items-center gap-3">
+    <div class="flex flex-col grow">
+        <div class="flex flex-col items-start gap-2 mb-4">
             <span
-                class="label-caps text-accent bg-accent-soft px-2 py-0.5 rounded-sm"
+                class="label-caps text-[10px] text-accent bg-accent-soft px-2 py-0.5 rounded-sm border border-accent/20"
                 >{tag}</span
             >
-            <h3 class="text-xl font-mono tracking-tight text-text">{name}</h3>
+            <h3 class="text-2xl font-mono tracking-tight text-text">
+                {name}
+            </h3>
         </div>
 
         <p class="text-base">
             {description}
         </p>
+    </div>
 
-        <div class="flex gap-6 mt-2">
-            {
-                actions.map((action) => (
-                    <a
-                        href={action.href}
-                        class="font-mono text-sm no-underline hover:text-accent"
-                    >
-                        {action.label}
-                    </a>
-                ))
-            }
-        </div>
+    <div class="flex flex-wrap gap-x-6 gap-y-2 mt-8 pt-4">
+        {
+            actions.map((action) => (
+                <a
+                    href={action.href}
+                    class="label-caps text-accent no-underline"
+                >
+                    {action.label}
+                </a>
+            ))
+        }
     </div>
 </article>
