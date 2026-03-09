@@ -1,5 +1,8 @@
 ---
+import GithubStars from "./GithubStats.astro";
+
 interface Props {
+    repo?: string;
     name: string;
     description: string;
     tag: string;
@@ -10,7 +13,7 @@ interface Props {
     };
 }
 
-const { name, description, tag, actions, image } = Astro.props;
+const { name, description, tag, actions, image, repo } = Astro.props;
 ---
 
 <article class="group flex flex-col h-full transition-colors duration-300 p-2">
@@ -25,29 +28,56 @@ const { name, description, tag, actions, image } = Astro.props;
     </div>
 
     <div class="flex flex-col grow">
-        <div class="flex flex-col items-start gap-2 mb-4">
+        <div class="flex items-center justify-between gap-4 mb-4">
             <span
-                class="label-caps text-[10px] text-accent bg-accent-soft px-2 py-0.5 rounded-sm border border-accent/20"
-                >{tag}</span
+                class="label-caps text-[9px] text-accent bg-accent/5 px-2 py-1 rounded-sm border border-accent/20"
             >
-            <h3 class="text-2xl font-mono tracking-tight text-text">
-                {name}
-            </h3>
+                {tag}
+            </span>
+
+            {
+                repo && (
+                    <GithubStars server:defer repo={repo}>
+                        <div
+                            slot="fallback"
+                            class="flex items-center border border-text/5 bg-text/2 opacity-30 animate-pulse rounded-sm divide-x divide-text/5"
+                        >
+                            <div class="px-2 py-0.5 text-[9px] font-mono">
+                                STARS --
+                            </div>
+                            <div class="px-2 py-0.5 text-[9px] font-mono">
+                                FORKS --
+                            </div>
+                        </div>
+                    </GithubStars>
+                )
+            }
         </div>
+
+        <h3 class="text-2xl font-mono tracking-tight text-text mb-3">
+            {name}
+        </h3>
 
         <p class="text-base">
             {description}
         </p>
     </div>
 
-    <div class="flex flex-wrap gap-x-6 gap-y-2 mt-8 pt-4">
+    <div
+        class="flex flex-wrap gap-x-6 gap-y-2 mt-8 pt-4 border-t border-text/10"
+    >
         {
             actions.map((action) => (
                 <a
                     href={action.href}
-                    class="label-caps text-accent no-underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="label-caps text-[11px] text-accent/80 hover:text-accent no-underline transition-colors flex items-center gap-1 group/link"
                 >
                     {action.label}
+                    <span class="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform">
+                        ↗
+                    </span>
                 </a>
             ))
         }
