@@ -1,5 +1,6 @@
 ---
 import Button from "./Button.astro";
+import ActionLink from "./ActionLink.astro";
 
 interface BaseExperience {
     id: string;
@@ -130,14 +131,10 @@ const experiences: ExperienceNode[] = [
                                                         {subRole.role}
                                                     </h4>
                                                     {subRole.url && (
-                                                        <a
+                                                        <ActionLink
                                                             href={subRole.url}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            class="px-2 py-0.5 border border-accent/30 text-accent font-mono text-[10px] hover:bg-accent/10 transition-all flex items-center gap-1.5 no-underline shrink-0"
-                                                        >
-                                                            <span>LINK ↗</span>
-                                                        </a>
+                                                            label={"LINK"}
+                                                        />
                                                     )}
                                                 </div>
                                                 <p class="font-mono text-xs opacity-40 uppercase tracking-widest">
@@ -182,14 +179,10 @@ const experiences: ExperienceNode[] = [
                                             {node.role}
                                         </h3>
                                         {node.url && (
-                                            <a
+                                            <ActionLink
                                                 href={node.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="px-2 py-0.5 border border-accent/30 text-accent font-mono text-[10px] hover:bg-accent/10 transition-all flex items-center gap-1.5 no-underline shrink-0"
-                                            >
-                                                <span>LINK ↗</span>
-                                            </a>
+                                                label={"LINK"}
+                                            />
                                         )}
                                     </div>
                                 </div>

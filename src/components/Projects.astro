@@ -9,13 +9,13 @@ import ProjectCard from "./ProjectCard.astro";
 
     <div
         class="watermark left-0 hidden 2xl:block"
-        style="transform: translate(-75%, 30%);"
+        style="transform: translate(-75%, 50%);"
     >
         {"{"}
     </div>
     <div
         class="watermark right-0 hidden 2xl:block"
-        style="transform: translate(75%, 30%);"
+        style="transform: translate(75%, 50%);"
     >
         {"}"}
     </div>
@@ -47,40 +47,58 @@ import ProjectCard from "./ProjectCard.astro";
         </div>
 
         <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 items-stretch"
         >
             <ProjectCard
+                repo="Wachamuli/lucien"
+                image={{
+                    src: "/lucien-launcher.png",
+                    alt: "Lucien Application Launcher Interface",
+                }}
                 name="Lucien"
                 tag="System_Tool"
                 description="A lightweight Wayland launcher optimized for zero perceived latency. Achieved a 67.5% reduction in syscall overhead through manual implementation of core protocols in Rust."
                 actions={[
-                    { href: "#", label: "[view_source]" },
-                    { href: "#", label: "[performance_metrics]" },
+                    {
+                        href: "https://github.com/Wachamuli/lucien",
+                        label: "view_source",
+                    },
+                    {
+                        href: "https://www.linkedin.com/posts/joserichiez_linux-opensource-rustlang-activity-7434671551943331840-FM8I?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFRphB4B3BW6lkNu39eNysJrOw06ZulEQSw",
+                        label: "view_metrics",
+                    },
                 ]}
             />
             <ProjectCard
+                image={{
+                    src: "/green-residential-mobile.png",
+                    alt: "Mobile application Interface",
+                }}
                 name="Green Residential"
                 tag="Full_Stack"
                 description="Cross-platform service booking application built with React Native and Supabase. Features a highly scalable PostgreSQL backend."
-                actions={[{ href: "#", label: "[view_source]" }]}
+                actions={[
+                    {
+                        href: "https://github.com/Wachamuli/GreenD",
+                        label: "view_source",
+                    },
+                ]}
             />
             <ProjectCard
+                image={{
+                    src: "/morpheus-dekstop-environment.png",
+                    alt: "Desktop Environment based on GTK",
+                }}
                 name="Morpheus"
                 tag="Local_First"
                 description="Morpheus is a custom-built desktop environment designed to transform barebones Wayland compositors into a fully functional workstation."
-                actions={[{ href: "#", label: "[view_source]" }]}
+                actions={[
+                    {
+                        href: "https://github.com/Wachamuli/morpheus",
+                        label: "view_source",
+                    },
+                ]}
             />
-        </div>
-
-        <div
-            class="mt-20 pt-8 border-t border-text/10 flex justify-center lg:hidden"
-        >
-            <a
-                href="https://github.com/Wachamuli"
-                class="label-caps text-accent border border-accent/20 px-6 py-3 rounded-md hover:bg-accent/5 transition-standard"
-            >
-                [ + more_on_github ]
-            </a>
         </div>
     </div>
 </section>

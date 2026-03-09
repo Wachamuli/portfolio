@@ -1,47 +1,76 @@
 ---
+import GithubStars from "./GithubStats.astro";
+import ActionLink from "./ActionLink.astro";
+
 interface Props {
+    repo?: string;
     name: string;
     description: string;
     tag: string;
     actions: { href: string; label: string }[];
+    image: {
+        src: string;
+        alt: string;
+    };
 }
 
-const { name, description, tag, actions } = Astro.props;
+const { name, description, tag, actions, image, repo } = Astro.props;
 ---
 
-<article class="group">
+<article class="group flex flex-col h-full transition-colors duration-300 p-2">
     <div
-        class="project-img mb-6 aspect-video flex items-center justify-center border-text/10 bg-text/2"
+        class="project-img mb-6 aspect-video flex items-center justify-center bg-text/5 overflow-hidden"
     >
-        <span class="font-mono text-text/20 uppercase tracking-widest text-sm">
-            // [Optimized_Launcher_Binary]
-        </span>
+        <img
+            src={image.src}
+            alt={image.alt}
+            class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
+        />
     </div>
 
-    <div class="flex flex-col gap-4">
-        <div class="flex items-center gap-3">
+    <div class="flex flex-col grow">
+        <div class="flex items-center justify-between gap-4 mb-4">
             <span
-                class="label-caps text-accent bg-accent-soft px-2 py-0.5 rounded-sm"
-                >{tag}</span
+                class="label-caps text-[9px] text-accent bg-accent/5 px-2 py-1 rounded-sm border border-accent/20"
             >
-            <h3 class="text-xl font-mono tracking-tight text-text">{name}</h3>
+                {tag}
+            </span>
+
+            {
+                repo && (
+                    <GithubStars server:defer repo={repo}>
+                        <div
+                            slot="fallback"
+                            class="flex items-center border border-text/5 bg-text/2 opacity-30 animate-pulse rounded-sm divide-x divide-text/5"
+                        >
+                            <div class="px-2 py-0.5 text-[9px] font-mono">
+                                STARS --
+                            </div>
+                            <div class="px-2 py-0.5 text-[9px] font-mono">
+                                FORKS --
+                            </div>
+                        </div>
+                    </GithubStars>
+                )
+            }
         </div>
+
+        <h3 class="text-2xl font-mono tracking-tight text-text mb-3">
+            {name}
+        </h3>
 
         <p class="text-base">
             {description}
         </p>
+    </div>
 
-        <div class="flex gap-6 mt-2">
-            {
-                actions.map((action) => (
-                    <a
-                        href={action.href}
-                        class="font-mono text-sm no-underline hover:text-accent"
-                    >
-                        {action.label}
-                    </a>
-                ))
-            }
-        </div>
+    <div
+        class="flex flex-wrap gap-x-6 gap-y-2 mt-8 pt-4 border-t border-text/10"
+    >
+        {
+            actions.map((action) => (
+                <ActionLink href={action.href} label={action.label} />
+            ))
+        }
     </div>
 </article>
