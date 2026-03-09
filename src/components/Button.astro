@@ -5,7 +5,7 @@ interface Props {
     label: string;
     sublabel?: string;
     class?: string;
-    variant?: "default" | "primary";
+    variant?: "default" | "primary" | "outline";
 }
 
 const {
@@ -19,6 +19,7 @@ const {
 const Element = href ? "a" : "button";
 
 const isPrimary = variant === "primary";
+const isOutline = variant === "outline";
 ---
 
 <Element
@@ -38,6 +39,7 @@ const isPrimary = variant === "primary";
                 "text-sm font-mono transition-colors",
                 !isPrimary && "text-text group-hover:text-accent",
                 isPrimary && "text-accent font-bold",
+                isOutline && "text-background",
             ]}
         >
             {label}
