@@ -61,50 +61,10 @@ const routes = ["experience", "projects", "contact", "support"];
     </div>
 </div>
 
-<script is:inline>
+<script>
     const navLinks = document.querySelectorAll(".nav-link");
     const sections = document.querySelectorAll("section[id]");
     const mobileDock = document.getElementById("mobile-dock");
-    const themeButtons = [
-        document.getElementById("theme-toggle"),
-        document.getElementById("theme-toggle-mobile"),
-    ];
-    const themeChars = [
-        document.getElementById("theme-char"),
-        document.getElementById("theme-char-mobile"),
-    ];
-
-    const setTheme = (theme) => {
-        const isDark = theme === "dark";
-        document.documentElement.classList.toggle("dark", isDark);
-        localStorage.setItem("theme", theme);
-
-        themeChars.forEach((el) => {
-            if (el) el.innerText = isDark ? "[x]" : "[ ]";
-        });
-    };
-
-    const getInitialTheme = () => {
-        const saved = localStorage.getItem("theme");
-        if (saved) return saved;
-        return window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-    };
-
-    // Run on load
-    setTheme(getInitialTheme());
-
-    themeButtons.forEach((btn) =>
-        btn?.addEventListener("click", () => {
-            const nextTheme = document.documentElement.classList.contains(
-                "dark",
-            )
-                ? "light"
-                : "dark";
-            setTheme(nextTheme);
-        }),
-    );
 
     window.addEventListener("scroll", () => {
         const atBottom =
@@ -136,4 +96,46 @@ const routes = ["experience", "projects", "contact", "support"];
     );
 
     sections.forEach((s) => observer.observe(s));
+</script>
+
+<script is:inline>
+    const themeButtons = [
+        document.getElementById("theme-toggle"),
+        document.getElementById("theme-toggle-mobile"),
+    ];
+    const themeChars = [
+        document.getElementById("theme-char"),
+        document.getElementById("theme-char-mobile"),
+    ];
+
+    const setTheme = (theme) => {
+        const isDark = theme === "dark";
+        document.documentElement.classList.toggle("dark", isDark);
+        localStorage.setItem("theme", theme);
+
+        themeChars.forEach((el) => {
+            if (el) el.innerText = isDark ? "[x]" : "[ ]";
+        });
+    };
+
+    const getInitialTheme = () => {
+        const saved = localStorage.getItem("theme");
+        if (saved) return saved;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+    };
+
+    setTheme(getInitialTheme());
+
+    themeButtons.forEach((btn) =>
+        btn?.addEventListener("click", () => {
+            const nextTheme = document.documentElement.classList.contains(
+                "dark",
+            )
+                ? "light"
+                : "dark";
+            setTheme(nextTheme);
+        }),
+    );
 </script>
