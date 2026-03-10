@@ -1,7 +1,7 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { Resend } from "resend";
-import { RESEND_API_KEY } from "astro:env/server";
+import { env } from "cloudflare:workers";
 
 export const server = {
   sendContactEmail: defineAction({
@@ -22,10 +22,10 @@ export const server = {
         .min(50, "ERR_BUFFER_UNDERFLOW: Message must be >= 50 chars."),
     }),
     handler: async ({ subject, email, message }) => {
-      const resend = new Resend(RESEND_API_KEY);
+      const resend = new Resend(env.RESEND_API_KEY);
       const { error } = await resend.emails.send({
         from: "Contact Form <system@contact.richiezrijo.com>",
-        to: ["josemrr27@gmail.com"], // TODO: replace with hello@richiezrijo.com when possible
+        to: ["hello@richiezrijo.com"],
         replyTo: [email],
         subject: subject,
         html: `

@@ -1,5 +1,5 @@
 ---
-import { GITHUB_ACCESS_TOKEN } from "astro:env/server";
+import { env } from "cloudflare:workers";
 
 interface Props {
     repo: string;
@@ -12,8 +12,9 @@ let forks = "0";
 try {
     const res = await fetch(`https://api.github.com/repos/${repo}`, {
         headers: {
-            Authorization: `Bearer ${GITHUB_ACCESS_TOKEN}`,
+            Authorization: `Bearer ${env.GITHUB_ACCESS_TOKEN}`,
             Accept: "application/vnd.github+json",
+            "User-Agent": "Astro-Cloudflare-App",
         },
     });
     if (res.ok) {
