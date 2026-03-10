@@ -9,42 +9,57 @@ import Button from "./Button.astro";
 >
     <div class="flex flex-col gap-8">
         <h2 class="text-2xl font-mono text-accent">/Contact</h2>
-        <form action="#" class="flex flex-col gap-6">
+
+        <form id="contact-form" class="flex flex-col gap-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-2">
                     <label class="label-caps">Subject</label>
                     <input
+                        name="subject"
                         type="text"
                         placeholder="refactor: improve-system-latency"
                         class="bg-text/5 border border-text/10 rounded-sm p-3 font-mono text-sm focus:border-accent outline-none transition-standard"
                     />
+                    <span
+                        id="subject-error"
+                        class="text-red-500 text-xs font-mono"></span>
                 </div>
                 <div class="flex flex-col gap-2">
                     <label class="label-caps">Return_Path</label>
                     <input
+                        name="email"
                         type="email"
                         placeholder="dev@null.local"
                         class="bg-text/5 border border-text/10 rounded-sm p-3 font-mono text-sm focus:border-accent outline-none transition-standard"
                     />
+                    <span
+                        id="email-error"
+                        class="text-red-500 text-xs font-mono"></span>
                 </div>
             </div>
 
             <div class="flex flex-col gap-2">
                 <label class="label-caps">Payload</label>
                 <textarea
+                    name="message"
                     placeholder="fn init_discussion() { /* Your message here */ }"
                     rows="5"
                     class="bg-text/5 border border-text/10 rounded-sm p-3 font-mono text-sm focus:border-accent outline-none transition-standard resize-none"
                 ></textarea>
+                <span id="message-error" class="text-red-500 text-xs font-mono"
+                ></span>
             </div>
 
-            <Button
-                type="submit"
-                label="POST request"
-                variant="primary"
-                sublabel="STATUS: READY_FOR_UPLOADING"
-                class="w-full md:w-auto"
-            />
+            <div class="flex flex-col gap-4">
+                <Button
+                    type="submit"
+                    label="POST request"
+                    variant="primary"
+                    sublabel="STATUS: READY_FOR_UPLOADING"
+                    class="w-full md:w-auto"
+                />
+                <p id="form-status" class="font-mono text-sm"></p>
+            </div>
         </form>
     </div>
 
@@ -91,3 +106,55 @@ import Button from "./Button.astro";
         </div>
     </div>
 </section>
+
+<script>
+    import { actions, isInputError } from "astro:actions";
+
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+    const statusMessage = document.getElementById("form-status");
+
+    // Error spans
+    const errorElements = {
+        subject: document.getElementById("subject-error"),
+        email: document.getElementById("email-error"),
+        message: document.getElementById("message-error"),
+    };
+
+    form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        // Reset previous states
+        statusMessage.textContent = "SENDING...";
+        statusMessage.className = "font-mono text-sm text-accent";
+        Object.values(errorElements).forEach((el) => (el.textContent = ""));
+
+        const formData = new FormData(form);
+        const { data, error } = await actions.sendContactEmail(formData);
+
+        if (error) {
+            if (isInputError(error)) {
+                // Handle Zod Validation Errors
+                statusMessage.textContent = "VALIDATION_FAILED";
+                statusMessage.classList.add("text-red-500");
+
+                if (error.fields.subject)
+                    errorElements.subject.textContent = error.fields.subject[0];
+                if (error.fields.email)
+                    errorElements.email.textContent = error.fields.email[0];
+                if (error.fields.message)
+                    errorElements.message.textContent = error.fields.message[0];
+            } else {
+                // Handle Action/Server Errors
+                statusMessage.textContent = "ERROR: " + error.message;
+                statusMessage.classList.add("text-red-500");
+            }
+            return;
+        }
+
+        if (data) {
+            statusMessage.textContent = "SUCCESS: " + data.message;
+            statusMessage.className = "font-mono text-sm text-green-500";
+            form.reset();
+        }
+    });
+</script>
