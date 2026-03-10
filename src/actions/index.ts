@@ -25,7 +25,7 @@ export const server = {
       const resend = new Resend(RESEND_API_KEY);
       const { error } = await resend.emails.send({
         from: "Contact Form <system@contact.richiezrijo.com>",
-        to: ["josemrr27@gmail.com"], // TODO: replace with hello@richiezrijo.com when possible
+        to: ["hello@richiezrijo.com"],
         replyTo: [email],
         subject: subject,
         html: `
