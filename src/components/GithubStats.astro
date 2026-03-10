@@ -1,5 +1,5 @@
 ---
-export const prerender = false;
+import { GITHUB_ACCESS_TOKEN } from "astro:env/server";
 
 interface Props {
     repo: string;
@@ -9,9 +9,13 @@ const { repo } = Astro.props;
 
 let stars = "0";
 let forks = "0";
-
 try {
-    const res = await fetch(`https://api.github.com/repos/${repo}`);
+    const res = await fetch(`https://api.github.com/repos/${repo}`, {
+        headers: {
+            Authorization: `Bearer ${GITHUB_ACCESS_TOKEN}`,
+            Accept: "application/vnd.github+json",
+        },
+    });
     if (res.ok) {
         const data = await res.json();
         stars = data.stargazers_count.toLocaleString();
@@ -27,11 +31,11 @@ try {
     class="flex items-center border border-text/10 bg-text/5 rounded-sm divide-x divide-text/10"
 >
     <div class="flex items-center gap-1.5 px-2 py-0.5">
-        <span class="text-[9px] text-accent label-caps">STARS</span>
+        <span class="text-[10px] text-accent label-caps">STARS</span>
         <span class="text-[10px] font-mono text-text">★ {stars}</span>
     </div>
     <div class="flex items-center gap-1.5 px-2 py-0.5">
-        <span class="text-[9px] text-accent label-caps">FORKS</span>
+        <span class="text-[10px] text-accent label-caps">FORKS</span>
         <span class="text-[10px] font-mono text-text"> {forks}</span>
     </div>
 </div>
