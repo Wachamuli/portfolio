@@ -11,18 +11,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  env: {
-    schema: {
-      RESEND_API_KEY: envField.string({
-        context: "server",
-        access: "secret",
-      }),
-      GITHUB_ACCESS_TOKEN: envField.string({
-        context: "server",
-        access: "secret",
-      }),
-    },
-  },
-
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: "cloudflare",
+  }),
 });
