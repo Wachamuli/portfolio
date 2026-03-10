@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -14,4 +14,17 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+
+  env: {
+    schema: {
+      RESEND_API_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      GITHUB_ACCESS_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+    },
+  },
 });
