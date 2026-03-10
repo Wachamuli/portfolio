@@ -14,6 +14,7 @@ try {
         headers: {
             Authorization: `Bearer ${env.GITHUB_ACCESS_TOKEN}`,
             Accept: "application/vnd.github+json",
+            "User-Agent": "Astro-Cloudflare-App",
         },
     });
     if (res.ok) {
