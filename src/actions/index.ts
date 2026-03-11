@@ -1,5 +1,5 @@
 import { ActionError, defineAction } from "astro:actions";
-import { z } from "astro:schema";
+import { z } from "astro/zod";
 import { Resend } from "resend";
 import { env } from "cloudflare:workers";
 
@@ -8,16 +8,12 @@ export const server = {
     accept: "form",
     input: z.object({
       subject: z
-        .string({ message: "ERR_MISSING_HEADER: Subject is required." })
-        .min(2, "ERR_LENGTH_MIN: Header must be >= 2 chars."),
-      email: z
-        .string({
-          message: "ERR_MISSING_RETURN_PATH: Email is required.",
-        })
-        .email("ERR_INVALID_FORMAT: Return_Path must be a valid URI."),
+        .string({ error: "ERR_MISSING_HEADER: Subject is required." })
+        .min(2, { error: "ERR_LENGTH_MIN: Header must be >= 2 chars." }),
+      email: z.email("ERR_INVALID_FORMAT: Return_Path must be a valid URI."),
       message: z
         .string({
-          message: "ERR_EMPTY_PAYLOAD: Message body is required.",
+          error: "ERR_EMPTY_PAYLOAD: Message body is required.",
         })
         .min(50, "ERR_BUFFER_UNDERFLOW: Message must be >= 50 chars."),
     }),
