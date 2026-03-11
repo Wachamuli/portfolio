@@ -6,14 +6,15 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate-types": "wrangler types"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.13",
+    "@astrojs/cloudflare": "^13.0.2",
     "@tailwindcss/vite": "^4.2.1",
-    "@types/node": "^25.4.0",
-    "astro": "^5.17.1",
+    "astro": "^6.0.2",
     "resend": "^6.9.3",
-    "tailwindcss": "^4.2.1"
+    "tailwindcss": "^4.2.1",
+    "wrangler": "^4.72.0"
   }
 }
