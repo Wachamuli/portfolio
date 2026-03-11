@@ -3,11 +3,11 @@ import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
 ---
 
-<Layout title="404: SEGMENTATION_FAULT">
+<Layout title="500: KERNEL_PANIC">
     <main
         class="relative min-h-screen flex items-center justify-center overflow-hidden bg-background px-6"
     >
-        <!-- <div class="watermark">0x00000194</div> -->
+        <!-- <div class="watermark">0x00000000F</div> -->
 
         <div class="max-w-2xl w-full space-y-8 relative z-10">
             <div
@@ -23,18 +23,17 @@ import Button from "../components/Button.astro";
                     <h1
                         class="text-4xl md:text-6xl font-mono text-accent tracking-tighter"
                     >
-                        404:<span class="text-text">SIGSEGV</span>
+                        500:<span class="text-text">SYS_FAILURE</span>
                     </h1>
 
                     <div class="space-y-2 text-sm leading-relaxed">
                         <p>
-                            {"> Memory address at"}
-                            <span class="text-accent">requested_url</span> could not
-                            be read.
+                            {"> System execution has been halted to prevent"}
+                            <span class="text-accent"> data corruption.</span>
                         </p>
                         <p>
                             {
-                                "> The process was terminated because it tried to access an unallocated memory segment."
+                                "> A stack overflow has occurred in the server-side runtime."
                             }
                         </p>
                     </div>
@@ -47,7 +46,7 @@ import Button from "../components/Button.astro";
                                 >Signal</span
                             >
                             <span class="text-xs block"
-                                >11 (Invalid Memory Reference)</span
+                                >06 (SIGABRT) [Abnormal Termination]</span
                             >
                         </div>
                         <div class="space-y-1">
