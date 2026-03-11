@@ -1,0 +1,86 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
+---
+
+<Layout title="404: SEGMENTATION_FAULT">
+    <main
+        class="relative min-h-screen flex items-center justify-center overflow-hidden bg-background px-6"
+    >
+        <div class="watermark">0x00000194</div>
+
+        <div class="max-w-2xl w-full space-y-8 relative z-10">
+            <div
+                class="p-6 border border-text/10 bg-text/2 backdrop-blur-sm rounded-sm font-mono"
+            >
+                <div
+                    class="flex items-center justify-between border-b border-text/10 pb-4 mb-6"
+                >
+                    <span class="text-[10px] label-caps">System_Interrupt</span>
+                </div>
+
+                <div class="space-y-4">
+                    <h1
+                        class="text-4xl md:text-6xl font-mono text-accent tracking-tighter"
+                    >
+                        404:<span class="text-text">SIGSEGV</span>
+                    </h1>
+
+                    <div class="space-y-2 text-sm leading-relaxed">
+                        <p>
+                            {"> Memory address at"}
+                            <span class="text-accent">requested_url</span> could not
+                            be read.
+                        </p>
+                        <p>
+                            {
+                                "> The process was terminated because it tried to access an unallocated memory segment."
+                            }
+                        </p>
+                    </div>
+
+                    <div
+                        class="pt-6 grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-text/10 mt-8"
+                    >
+                        <div class="space-y-1">
+                            <span class="text-[9px] opacity-40 uppercase"
+                                >Signal</span
+                            >
+                            <span class="text-xs block"
+                                >11 (Invalid Memory Reference)</span
+                            >
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[9px] opacity-40 uppercase"
+                                >Context</span
+                            >
+                            <span class="text-xs block"
+                                >Hyperlink_Dereference</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="flex flex-col md:flex-row items-center justify-center gap-4 pt-4"
+            >
+                <Button
+                    href="/"
+                    variant="primary"
+                    label="REBOOT_SYSTEM (Home)"
+                />
+                <Button
+                    href="/#projects"
+                    variant="outline"
+                    label="VIEW_LOGS (Projects)"
+                />
+            </div>
+
+            <p class="mx-auto text-sm font-mono opacity-40 leading-relaxed">
+                // If this problem persists, please contact the administrator
+                via CONNECT.remote()
+            </p>
+        </div>
+    </main>
+</Layout>
