@@ -1,4 +1,5 @@
 ---
+export const prerender = false;
 import { env } from "cloudflare:workers";
 
 interface Props {
@@ -9,6 +10,7 @@ const { repo } = Astro.props;
 
 let stars = "0";
 let forks = "0";
+console.log("Fetch init");
 try {
     const res = await fetch(`https://api.github.com/repos/${repo}`, {
         headers: {
@@ -17,12 +19,14 @@ try {
             "User-Agent": "Astro-Cloudflare-App",
         },
     });
+    console.log("Res: ", res);
     if (res.ok) {
         const data = await res.json();
         stars = data.stargazers_count.toLocaleString();
         forks = data.forks_count.toLocaleString();
     }
 } catch (e) {
+    console.log("Error", e);
     stars = "—";
     forks = "—";
 }
@@ -32,7 +36,7 @@ try {
     class="flex items-center border border-text/10 bg-text/5 rounded-sm divide-x divide-text/10"
 >
     <div class="flex items-center gap-1.5 px-2 py-0.5">
-        <span class="text-[10px] text-accent label-caps">STARS</span>
+        <span class="text-[10px] text-accent label-caps">STRS</span>
         <span class="text-[10px] font-mono text-text">★ {stars}</span>
     </div>
     <div class="flex items-center gap-1.5 px-2 py-0.5">
