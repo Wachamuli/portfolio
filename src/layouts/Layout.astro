@@ -1,6 +1,8 @@
 ---
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
+
+const { title = "Jose Richiez" } = Astro.props;
 ---
 
 <html lang="en">
@@ -32,7 +34,7 @@ import "../styles/global.css";
             content="Software Engineer building high-performance system tools and modern web experiences."
         />
         <meta property="twitter:image" content="/og-image.png" />
-        <title>Jose Richiez</title>
+        <title>{title}</title>
         <script is:inline>
             const theme = (() => {
                 const saved = localStorage.getItem("theme");
