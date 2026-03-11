@@ -1,8 +1,6 @@
 ---
 import { GITHUB_ACCESS_TOKEN } from "astro:env/server";
 
-export const prerender = false;
-
 interface Props {
     repo: string;
 }
@@ -17,7 +15,7 @@ try {
         headers: {
             Authorization: `Bearer ${GITHUB_ACCESS_TOKEN}`,
             Accept: "application/vnd.github+json",
-            "User-Agent": "Astro-Cloudflare-App",
+            // "User-Agent": "Astro-Cloudflare-App",
         },
     });
     console.log("Res: ", res);
