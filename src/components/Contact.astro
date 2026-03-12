@@ -58,7 +58,7 @@ import Button from "./Button.astro";
                     sublabel="STATUS: READY_FOR_UPLOADING"
                     class="w-full md:w-auto"
                 />
-                <p id="form-status" class="font-mono text-sm"></p>
+                <span id="form-status" class="font-mono text-sm"></span>
             </div>
         </form>
     </div>
@@ -110,51 +110,61 @@ import Button from "./Button.astro";
 <script>
     import { actions, isInputError } from "astro:actions";
 
-    const form = document.getElementById("contact-form") as HTMLFormElement;
-    const statusMessage = document.getElementById("form-status");
+    function initContactForm(): void {
+        const form = document.querySelector<HTMLFormElement>("#contact-form");
+        const status = document.querySelector("#form-status");
 
-    // Error spans
-    const errorElements = {
-        subject: document.getElementById("subject-error"),
-        email: document.getElementById("email-error"),
-        message: document.getElementById("message-error"),
-    };
+        const subjectErr = document.querySelector("#subject-error");
+        const emailErr = document.querySelector("#email-error");
+        const messageErr = document.querySelector("#message-error");
 
-    form?.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
-        // Reset previous states
-        statusMessage.textContent = "SENDING...";
-        statusMessage.className = "font-mono text-sm text-accent";
-        Object.values(errorElements).forEach((el) => (el.textContent = ""));
-
-        const formData = new FormData(form);
-        const { data, error } = await actions.sendContactEmail(formData);
-
-        if (error) {
-            if (isInputError(error)) {
-                // Handle Zod Validation Errors
-                statusMessage.textContent = "VALIDATION_FAILED";
-                statusMessage.classList.add("text-red-500");
-
-                if (error.fields.subject)
-                    errorElements.subject.textContent = error.fields.subject[0];
-                if (error.fields.email)
-                    errorElements.email.textContent = error.fields.email[0];
-                if (error.fields.message)
-                    errorElements.message.textContent = error.fields.message[0];
-            } else {
-                // Handle Action/Server Errors
-                statusMessage.textContent = "ERROR: " + error.message;
-                statusMessage.classList.add("text-red-500");
-            }
+        if (!form || !status || !subjectErr || !emailErr || !messageErr) {
+            console.warn("Contact form UI elements are incomplete.");
             return;
         }
 
-        if (data) {
-            statusMessage.textContent = "SUCCESS: " + data.message;
-            statusMessage.className = "font-mono text-sm text-green-500";
+        const errorElements = {
+            subject: subjectErr,
+            email: emailErr,
+            message: messageErr,
+        };
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            status.textContent = "SENDING...";
+            status.className = "font-mono text-sm";
+            Object.values(errorElements).forEach((el) => (el.textContent = ""));
+
+            const formData = new FormData(form);
+            const { data, error } = await actions.sendContactEmail(formData);
+
+            if (error) {
+                if (isInputError(error)) {
+                    if (error.fields.subject) {
+                        errorElements.subject.textContent =
+                            error.fields.subject[0];
+                    }
+                    if (error.fields.email) {
+                        errorElements.email.textContent = error.fields.email[0];
+                    }
+                    if (error.fields.message) {
+                        errorElements.message.textContent =
+                            error.fields.message[0];
+                    }
+                    status.textContent = "";
+                    return;
+                }
+
+                status.textContent = `ERROR: ${error.message}`;
+                status.classList.add("text-red-500");
+                return;
+            }
+
+            status.textContent = `SUCCESS: ${data.message}`;
+            status.classList.add("text-green-500");
             form.reset();
-        }
-    });
+        });
+    }
+
+    initContactForm();
 </script>

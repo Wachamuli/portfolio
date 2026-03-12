@@ -1,4 +1,5 @@
 ---
+import type { GitHubStats } from "../types";
 import { GITHUB_ACCESS_TOKEN } from "astro:env/server";
 
 interface Props {
@@ -7,24 +8,24 @@ interface Props {
 
 const { repo } = Astro.props;
 
-let stars = "0";
-let forks = "0";
-try {
-    const res = await fetch(`https://api.github.com/repos/${repo}`, {
+let githubStats = await Astro.session?.get("githubStats");
+
+if (!githubStats) {
+    const url = `https://api.github.com/repos/${repo}`;
+    const requestInit = {
         headers: {
             Authorization: `Bearer ${GITHUB_ACCESS_TOKEN}`,
             Accept: "application/vnd.github+json",
             "User-Agent": "Astro-Cloudflare-App",
         },
-    });
-    if (res.ok) {
-        const data = await res.json();
-        stars = data.stargazers_count.toLocaleString();
-        forks = data.forks_count.toLocaleString();
-    }
-} catch (e) {
-    stars = "—";
-    forks = "—";
+    };
+    const data = await fetch(url, requestInit)
+        .then((r) => (r.ok ? r.json<GitHubStats>() : null))
+        .catch(() => null);
+    const stargazers_count = data?.stargazers_count?.toLocaleString() ?? "—";
+    const forks_count = data?.forks_count?.toLocaleString() ?? "—";
+    githubStats = { stargazers_count, forks_count };
+    Astro.session?.set("githubStats", githubStats, { ttl: 86400 });
 }
 ---
 
@@ -33,10 +34,14 @@ try {
 >
     <div class="flex items-center gap-1.5 px-2 py-0.5">
         <span class="text-[10px] text-accent label-caps">STARS</span>
-        <span class="text-[10px] font-mono text-text">★ {stars}</span>
+        <span class="text-[10px] font-mono text-text"
+            >★ {githubStats.stargazers_count}</span
+        >
     </div>
     <div class="flex items-center gap-1.5 px-2 py-0.5">
         <span class="text-[10px] text-accent label-caps">FORKS</span>
-        <span class="text-[10px] font-mono text-text"> {forks}</span>
+        <span class="text-[10px] font-mono text-text">
+            {githubStats.forks_count}</span
+        >
     </div>
 </div>
