@@ -5,10 +5,13 @@ import tailwindcss from "@tailwindcss/vite";
 
 import cloudflare from "@astrojs/cloudflare";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
   output: "server",
   site: "https://richiezrijo.com/",
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },
