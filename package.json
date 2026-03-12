@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.0.2",
+    "@astrojs/sitemap": "^3.7.1",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^6.0.2",
     "resend": "^6.9.3",

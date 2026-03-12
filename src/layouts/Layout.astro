@@ -2,7 +2,7 @@
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
 
-const { title = "Jose Richiez" } = Astro.props;
+const { title = "Portfolio of Jose Richiez Rijo" } = Astro.props;
 ---
 
 <html lang="en">
@@ -15,12 +15,12 @@ const { title = "Jose Richiez" } = Astro.props;
         <link rel="sitemap" href="/sitemap-index.xml" />
         <meta
             name="description"
-            content="Portfolio of Jose Richiez - Software Engineer."
+            content="Explore the portfolio of Jose Richiez, a Software Engineer and open source lover specializing in building high-performance system tools and scalable web applications."
         />
         <meta name="robots" content="index, follow" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://richiezrijo.com/" />
-        <meta property="og:title" content="Jose Richiez" />
+        <meta property="og:title" content={title} />
         <meta
             property="og:description"
             content="Software Engineer building high-performance system tools and modern web experiences. "
@@ -29,7 +29,7 @@ const { title = "Jose Richiez" } = Astro.props;
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://richiezrijo.com/" />
-        <meta property="twitter:title" content="Jose Richiez" />
+        <meta property="twitter:title" content={title} />
         <meta
             property="twitter:description"
             content="Software Engineer building high-performance system tools and modern web experiences."
