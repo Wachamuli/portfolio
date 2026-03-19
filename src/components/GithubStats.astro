@@ -8,25 +8,20 @@ interface Props {
 
 const { repo } = Astro.props;
 
-let githubStats = await Astro.session?.get("githubStats");
-
-if (!githubStats) {
-    const url = `https://api.github.com/repos/${repo}`;
-    const requestInit = {
-        headers: {
-            Authorization: `Bearer ${GITHUB_ACCESS_TOKEN}`,
-            Accept: "application/vnd.github+json",
-            "User-Agent": "Astro-Cloudflare-App",
-        },
-    };
-    const data = await fetch(url, requestInit)
-        .then((r) => (r.ok ? r.json<GitHubStats>() : null))
-        .catch(() => null);
-    const stargazers_count = data?.stargazers_count?.toLocaleString() ?? "—";
-    const forks_count = data?.forks_count?.toLocaleString() ?? "—";
-    githubStats = { stargazers_count, forks_count };
-    Astro.session?.set("githubStats", githubStats, { ttl: 86400 });
-}
+const url = `https://api.github.com/repos/${repo}`;
+const requestInit = {
+    headers: {
+        Authorization: `Bearer ${GITHUB_ACCESS_TOKEN}`,
+        Accept: "application/vnd.github+json",
+        "User-Agent": "Astro-Cloudflare-App",
+    },
+};
+const data = await fetch(url, requestInit)
+    .then((r) => (r.ok ? r.json<GitHubStats>() : null))
+    .catch(() => null);
+const stargazers_count = data?.stargazers_count?.toLocaleString() ?? "—";
+const forks_count = data?.forks_count?.toLocaleString() ?? "—";
+const githubStats = { stargazers_count, forks_count };
 ---
 
 <div
