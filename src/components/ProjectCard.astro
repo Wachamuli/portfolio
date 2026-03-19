@@ -38,7 +38,7 @@ const { name, description, tag, actions, image, repo } = Astro.props;
 
             {
                 repo && (
-                    <GithubStars server:defer repo={repo}>
+                    <GithubStars repo={repo}>
                         <div
                             slot="fallback"
                             class="flex items-center border border-text/5 bg-text/2 opacity-30 animate-pulse rounded-sm divide-x divide-text/5"
