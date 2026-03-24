@@ -1,4 +1,5 @@
 ---
+import Tag from "./Tag.astro";
 import GithubStars from "./GithubStats.astro";
 import ActionLink from "./ActionLink.astro";
 
@@ -30,15 +31,10 @@ const { name, description, tag, actions, image, repo } = Astro.props;
 
     <div class="flex flex-col grow">
         <div class="flex items-center justify-between gap-4 mb-4">
-            <span
-                class="label-caps text-[9px] text-accent bg-accent/5 px-2 py-1 rounded-sm border border-accent/20"
-            >
-                {tag}
-            </span>
-
+            <Tag><span class="text-accent">{tag}</span></Tag>
             {
                 repo && (
-                    <GithubStars repo={repo}>
+                    <GithubStars server:defer repo={repo}>
                         <div
                             slot="fallback"
                             class="flex items-center border border-text/5 bg-text/2 opacity-30 animate-pulse rounded-sm divide-x divide-text/5"
