@@ -1,6 +1,7 @@
 ---
 import Button from "./Button.astro";
 import ActionLink from "./ActionLink.astro";
+import Tag from "./Tag.astro";
 
 interface BaseExperience {
     id: string;
@@ -84,7 +85,7 @@ const experiences: ExperienceNode[] = [
     >
         <div class="space-y-4">
             <h2 class="text-2xl font-mono text-accent">/Experience</h2>
-            <p class="font-mono opacity-50 tracking-tight">
+            <p class="font-mono opacity-70 tracking-tight">
                 // Professional lifecycle and technical contributions
             </p>
         </div>
@@ -137,7 +138,7 @@ const experiences: ExperienceNode[] = [
                                                         />
                                                     )}
                                                 </div>
-                                                <p class="font-mono text-xs opacity-40 uppercase tracking-widest">
+                                                <p class="font-mono text-xs opacity-70 uppercase tracking-widest">
                                                     {subRole.period}
                                                 </p>
 
@@ -157,9 +158,7 @@ const experiences: ExperienceNode[] = [
                                                 <div class="flex flex-wrap gap-2 pt-4">
                                                     {subRole.stack.map(
                                                         (tech) => (
-                                                            <span class="px-3 py-1 bg-text/5 border border-text/10 font-mono text-[10px] opacity-50 uppercase tracking-wider">
-                                                                {tech}
-                                                            </span>
+                                                            <Tag>{tech}</Tag>
                                                         ),
                                                     )}
                                                 </div>
@@ -186,7 +185,7 @@ const experiences: ExperienceNode[] = [
                                         )}
                                     </div>
                                 </div>
-                                <p class="font-mono text-xs opacity-40 uppercase tracking-widest">
+                                <p class="font-mono text-xs opacity-70 uppercase tracking-widest">
                                     @ {node.company} // {node.period}
                                 </p>
 
@@ -203,9 +202,7 @@ const experiences: ExperienceNode[] = [
 
                                 <div class="flex flex-wrap gap-2 pt-4">
                                     {node.stack.map((tech) => (
-                                        <span class="px-3 py-1 bg-text/5 border border-text/10 font-mono text-[10px] opacity-50 uppercase tracking-wider">
-                                            {tech}
-                                        </span>
+                                        <Tag>{tech}</Tag>
                                     ))}
                                 </div>
                             </div>

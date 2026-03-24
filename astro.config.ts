@@ -9,7 +9,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "static",
+  output: "server",
   site: "https://richiezrijo.com/",
   integrations: [sitemap()],
   vite: {

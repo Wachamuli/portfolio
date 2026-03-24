@@ -26,7 +26,7 @@ import ProjectCard from "./ProjectCard.astro";
         >
             <div>
                 <h2 class="text-2xl font-mono text-accent mb-2">/Projects</h2>
-                <p class="font-mono opacity-50 tracking-tight">
+                <p class="font-mono opacity-70 tracking-tight">
                     // Selected builds: focus on performance and systems
                     architecture
                 </p>
@@ -50,6 +50,7 @@ import ProjectCard from "./ProjectCard.astro";
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 items-stretch"
         >
             <ProjectCard
+                status="active"
                 repo="Wachamuli/lucien"
                 image={{
                     src: "/lucien-launcher.avif",
@@ -70,6 +71,7 @@ import ProjectCard from "./ProjectCard.astro";
                 ]}
             />
             <ProjectCard
+                status="completed"
                 image={{
                     src: "/green-residential-mobile.avif",
                     alt: "Mobile application Interface",
@@ -85,6 +87,7 @@ import ProjectCard from "./ProjectCard.astro";
                 ]}
             />
             <ProjectCard
+                status="completed"
                 image={{
                     src: "/morpheus-dekstop-environment.avif",
                     alt: "Desktop Environment based on GTK",

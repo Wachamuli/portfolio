@@ -77,28 +77,29 @@
         scroll-margin-top: 4rem;
     }
 
-    body {
-        @apply bg-background text-text font-sans antialiased;
-        transition:
-            background-color var(--transition-standard),
-            color var(--transition-standard),
-            border-color var(--transition-standard),
-            text-decoration-color var(--transition-standard),
-            fill var(--transition-standard),
-            stroke var(--transition-standard);
-    }
-
+    body,
     nav,
     div,
     section,
     footer,
     button,
-    a {
-        transition:
-            background-color var(--transition-standard),
-            color var(--transition-standard),
-            border-color var(--transition-standard),
-            opacity var(--transition-standard);
+    a,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+        transition-property:
+            background-color, color, border-color, text-decoration-color, fill,
+            stroke, opacity, box-shadow;
+        transition-duration: 200ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+        @apply bg-background text-text font-sans antialiased;
     }
 
     h1,
@@ -116,7 +117,6 @@
     }
 
     a {
-        transition: all var(--transition-standard);
         text-decoration: underline;
         @apply cursor-pointer underline-offset-8 decoration-accent/20;
 
@@ -127,7 +127,6 @@
 
     button {
         @apply cursor-pointer inline-flex items-center justify-center px-6 py-3 rounded-md font-mono text-sm tracking-tight;
-        transition: all var(--transition-standard);
         border: 1px solid transparent;
     }
 
@@ -150,7 +149,7 @@
 
 @utility project-img {
     @apply rounded-lg border border-background shadow-sm overflow-hidden bg-background;
-    transition: transform var(--transition-standard);
+    transition-property: transform, border-color, box-shadow;
 
     &:hover {
         transform: translateY(-4px);
@@ -176,7 +175,6 @@
 
 @utility watermark {
     @apply absolute select-none -z-10 font-mono text-[24rem] leading-none pointer-events-none text-accent/5;
-    transition: color var(--transition-standard);
 
     @variant dark {
         @apply text-accent/15;
