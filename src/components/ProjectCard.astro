@@ -2,6 +2,7 @@
 import Tag from "./Tag.astro";
 import GithubStars from "./GithubStats.astro";
 import ActionLink from "./ActionLink.astro";
+import GithubStats from "./GithubStats.astro";
 
 interface Props {
     repo?: string;
@@ -9,60 +10,61 @@ interface Props {
     description: string;
     tag: string;
     actions: { href: string; label: string }[];
+    status: "active" | "completed";
     image: {
         src: string;
         alt: string;
     };
 }
 
-const { name, description, tag, actions, image, repo } = Astro.props;
+const { name, description, tag, actions, image, repo, status } = Astro.props;
+
+// Mocking dynamic stats for the prototype
+const stats = { stars: "162", forks: "7" };
 ---
 
-<article class="group flex flex-col h-full transition-colors duration-300 p-2">
+<article
+    class="group relative flex flex-col h-full bg-background border border-text/10 hover:border-accent rounded-sm overflow-hidden"
+>
     <div
-        class="project-img mb-6 aspect-video flex items-center justify-center bg-text/5 overflow-hidden"
+        class="flex items-center justify-between px-4 py-2 border-b border-text/10 bg-text/3"
     >
+        <div class="flex items-center gap-2">
+            <span class="label-caps text-accent">
+                {tag}
+            </span>
+        </div>
+        <span class="label-caps text-[9px] opacity-70">
+            Status: {status}
+        </span>
+    </div>
+
+    <div class="relative aspect-video overflow-hidden bg-text/5">
         <img
             src={image.src}
             alt={image.alt}
-            class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
+            class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-transform duration-700 ease-out"
         />
+        <div
+            class="absolute inset-0 pointer-events-none bg-linear-to-b from-transparent via-accent/5 to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_3s_linear_infinite] opacity-0 group-hover:opacity-100"
+        >
+        </div>
     </div>
 
-    <div class="flex flex-col grow">
-        <div class="flex items-center justify-between gap-4 mb-4">
-            <Tag><span class="text-accent">{tag}</span></Tag>
-            {
-                repo && (
-                    <GithubStars server:defer repo={repo}>
-                        <div
-                            slot="fallback"
-                            class="flex items-center border border-text/5 bg-text/2 opacity-30 animate-pulse rounded-sm divide-x divide-text/5"
-                        >
-                            <div class="px-2 py-0.5 text-[9px] font-mono">
-                                STARS --
-                            </div>
-                            <div class="px-2 py-0.5 text-[9px] font-mono">
-                                FORKS --
-                            </div>
-                        </div>
-                    </GithubStars>
-                )
-            }
-        </div>
+    {repo && <GithubStats server:defer {repo} />}
 
-        <h3 class="text-2xl font-mono tracking-tight text-text mb-3">
+    <div class="p-5 flex flex-col grow">
+        <h3
+            class="text-2xl font-mono tracking-tighter mb-3 group-hover:text-accent transition-colors"
+        >
             {name}
         </h3>
-
         <p class="text-base">
             {description}
         </p>
     </div>
 
-    <div
-        class="flex flex-wrap gap-x-6 gap-y-2 mt-8 pt-4 border-t border-text/10"
-    >
+    <div class="p-3 grid grid-cols-2 gap-3 border-t border-text/10 bg-text/2">
         {
             actions.map((action) => (
                 <ActionLink href={action.href} label={action.label} />

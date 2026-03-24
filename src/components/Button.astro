@@ -39,7 +39,7 @@ const isOutline = variant === "outline";
                 "text-sm font-mono transition-colors",
                 !isPrimary && "text-text group-hover:text-accent",
                 isPrimary && "text-accent font-bold",
-                isOutline && "text-background",
+                isOutline && "text-background font-medium",
             ]}
         >
             {label}
@@ -49,7 +49,7 @@ const isOutline = variant === "outline";
             sublabel && (
                 <span
                     class:list={[
-                        "text-[9px] font-mono tracking-tighter italic uppercase",
+                        "text-[9px] font-mono leading-relaxed italic uppercase",
                         !isPrimary && "opacity-70",
                         isPrimary && "text-accent/70",
                     ]}
