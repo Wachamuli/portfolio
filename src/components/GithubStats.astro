@@ -25,19 +25,15 @@ const forks_count = data?.forks_count?.toLocaleString() ?? "—";
 const githubStats = { stargazers_count, forks_count };
 ---
 
-<Tag>
-    <div class="flex items-center divide-x divide-text/10">
-        <div class="flex items-center gap-1.5 px-2">
-            <span class="text-[10px] text-accent label-caps">STARS</span>
-            <span class="text-[10px] font-mono text-text"
-                >{githubStats.stargazers_count}</span
-            >
-        </div>
-        <div class="flex items-center gap-1.5 px-2">
-            <span class="text-[10px] text-accent label-caps">FORKS</span>
-            <span class="text-[10px] font-mono text-text">
-                {githubStats.forks_count}</span
-            >
-        </div>
+<div
+    class="grid grid-cols-2 divide-x divide-text/10 border-b border-text/10 font-mono text-[10px]"
+>
+    <div class="px-4 py-2 flex items-center justify-between">
+        <span class="opacity-40">STARS</span>
+        <span class="text-accent">{githubStats.stargazers_count}</span>
     </div>
-</Tag>
+    <div class="px-4 py-2 flex items-center justify-between">
+        <span class="opacity-40">FORKS</span>
+        <span class="text-accent">{githubStats.forks_count}</span>
+    </div>
+</div>
