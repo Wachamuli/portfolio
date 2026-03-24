@@ -26,7 +26,7 @@ const isOutline = variant === "outline";
     href={href}
     type={!href ? type : undefined}
     class:list={[
-        "group flex items-center gap-4 px-6 py-4 border transition-all duration-300 no-underline",
+        "group flex items-center gap-4 px-6 py-4 border transition-all duration-300 no-underline rounded-sm",
         !isPrimary && "border-text/10 bg-white/2 hover:bg-accent-soft ",
         isPrimary &&
             "border-accent/40 bg-accent/5 hover:bg-accent/10 hover:border-accent shadow-[0_0_20px_rgba(var(--accent-rgb),0.1)]",
