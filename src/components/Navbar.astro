@@ -20,9 +20,9 @@ const routes = ["experience", "projects", "contact", "support"];
                 {
                     routes.map((route) => (
                         <a
-                            href={`#${route}`}
+                            href={`/#${route}`}
                             data-section={route}
-                            class="nav-link label-caps hover:text-accent transition-all no-underline opacity-60"
+                            class="nav-link label-caps hover:text-accent transition-all no-underline opacity-70"
                         >
                             {`/${route}`}
                         </a>
@@ -50,9 +50,9 @@ const routes = ["experience", "projects", "contact", "support"];
         {
             routes.map((route) => (
                 <a
-                    href={`#${route}`}
+                    href={`/#${route}`}
                     data-section={route}
-                    class="nav-link text-[11px] font-mono uppercase tracking-tighter hover:text-accent no-underline opacity-50 transition-all duration-300 px-4 py-1"
+                    class="nav-link text-[11px] font-mono uppercase tracking-tighter hover:text-accent no-underline opacity-70 transition-all duration-300 px-4 py-1"
                 >
                     {`/${route}`}
                 </a>
