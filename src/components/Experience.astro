@@ -44,65 +44,64 @@ const experiences = [
 ];
 ---
 
-<section id="experience" class="portfolio-section">
+<section id="experience" class="portfolio-section max-w-7xl mx-auto px-6">
     <div class="watermark left-0" style="transform: translate(-20%, 20%);">
         {"~"}
     </div>
-    <div class="flex flex-wrap items-end justify-between gap-8 mb-20">
+
+    <div class="flex flex-wrap items-end justify-between gap-8 mb-20 pb-8">
         <div class="space-y-2">
             <h2 class="text-2xl text-accent">/Experience</h2>
-            <p class="font-mono opacity-70 tracking-tight">
+            <p class="font-mono opacity-70 tracking-tight text-sm">
                 // Professional lifecycle and technical contributions
             </p>
         </div>
         <Button
-            href="/Systems-Engineer-Resume-Jose-Richiez.pdf"
+            href="/Systems-Engineer-Jose-Richiez.pdf"
             label="GET resume.pdf"
             variant="primary"
             sublabel="SHA256: 5F4DCC3B..."
         />
     </div>
 
-    <div
-        class="relative border-l border-text/10 ml-4 md:ml-6 space-y-20 mx-auto"
-    >
+    <div class="relative border-l border-text/10 ml-4 md:ml-6 space-y-32">
         {
             experiences.map((exp) => (
-                <div class="relative pl-10 group">
-                    <div class="absolute -left-1.5 top-2 w-2.5 h-2.5 bg-background border border-text/20 rounded-full group-hover:border-accent group-hover:shadow-[0_0_8px_var(--accent)] transition-all duration-300" />
+                <div class="relative pl-10 group grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="absolute -left-1.5 top-2 w-2.5 h-2.5 bg-background border border-text/20 rounded-full group-hover:border-accent group-hover:shadow-[0_0_12px_var(--accent)] transition-all duration-300" />
 
-                    <div class="space-y-10">
+                    <div class="lg:col-span-8 space-y-10">
                         <div class="flex items-center gap-3">
                             <span class="text-accent text-[10px] font-bold">
                                 [{exp.id || "NODE"}]
                             </span>
-                            <h3 class="text-xl opacity-50 uppercase tracking-[0.2em]">
+                            <h3 class="text-xl opacity-40 uppercase tracking-[0.3em] font-mono">
                                 {exp.company}
                             </h3>
                         </div>
 
                         {(exp.roles || [exp]).map((item) => (
-                            <div class="space-y-4 relative">
+                            <div class="space-y-6 relative border-l border-text/5 pl-6 ml-1">
                                 <div class="flex flex-wrap items-center gap-4">
-                                    <h4 class="text-2xl font-mono tracking-tight text-text ">
+                                    <h4 class="text-3xl font-mono tracking-tighter text-text font-medium">
                                         {item.role}
                                     </h4>
                                     {item.url && (
                                         <ActionLink
                                             href={item.url}
-                                            label="LINK"
+                                            label="VIEW_LIVE"
                                         />
                                     )}
                                 </div>
 
-                                <p class="text-[10px] opacity-70 uppercase tracking-widest font-bold">
+                                <p class="text-xs font-mono opacity-70 label-caps font-medium px-2 py-1">
                                     {item.period}
                                 </p>
 
-                                <ul class="space-y-3 max-w-2xl font-sans">
+                                <ul class="space-y-4 max-w-2xl font-sans">
                                     {item.details.map((detail) => (
-                                        <li class="text-base opacity-80 flex gap-4 leading-relaxed">
-                                            <span class="text-accent/30 font-mono shrink-0 mt-1">
+                                        <li class="text-base opacity-80 flex gap-4 leading-relaxed group-hover:opacity-100 transition-opacity">
+                                            <span class="text-accent/40 font-mono shrink-0">
                                                 ├─
                                             </span>
                                             {detail}
@@ -110,13 +109,59 @@ const experiences = [
                                     ))}
                                 </ul>
 
-                                <div class="flex flex-wrap gap-2 pt-2">
+                                <div class="flex flex-wrap gap-2 pt-4">
                                     {item.stack.map((tech) => (
                                         <Tag>{tech}</Tag>
                                     ))}
                                 </div>
                             </div>
                         ))}
+                    </div>
+
+                    <div class="hidden lg:flex lg:col-span-4 flex-col justify-start border-l border-text/10 pl-8 space-y-8 self-start sticky top-24">
+                        <div class="font-mono space-y-6">
+                            <div class="text-[10px] opacity-70 uppercase label-caps">
+                                Runtime_Analysis
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="text-[11px] text-accent uppercase label-caps">
+                                    Architecture_Pattern
+                                </div>
+                                <div class="text-sm font-bold opacity-80">
+                                    {exp.company === "Health One"
+                                        ? "Event-Driven / Serverless"
+                                        : "Monolith / Edge-Deployed"}
+                                </div>
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="text-[11px] text-accent uppercase label-caps">
+                                    Primary_Optimization
+                                </div>
+                                <div class="text-xs opacity-70 leading-relaxed">
+                                    {exp.company === "Health One"
+                                        ? "Focus on relational integrity and identity management via AWS Cognito."
+                                        : "Focus on sub-millisecond I/O and Unix-compliant instructional design[cite: 50, 53]."}
+                                </div>
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="text-[11px] text-accent uppercase label-caps">
+                                    Deployment_Target
+                                </div>
+                                <code class="text-xs text-accent bg-accent/5 px-2 py-1 rounded">
+                                    {exp.company === "Health One"
+                                        ? "aws-us-east-1"
+                                        : "deno-deploy-edge"}
+                                </code>
+                            </div>
+                            <div class="pt-12 relative opacity-10">
+                                <div class="text-[8px] uppercase tracking-[0.5em] [writing-mode:vertical-lr] absolute right-0">
+                                    AUTH_LEVEL_INTERNAL // TRACE_ID_{exp.id}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             ))
