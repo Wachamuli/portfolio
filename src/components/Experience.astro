@@ -44,7 +44,7 @@ const experiences = [
 ];
 ---
 
-<section id="experience" class="portfolio-section max-w-7xl mx-auto px-6">
+<section id="experience" class="portfolio-section">
     <div class="watermark left-0" style="transform: translate(-20%, 20%);">
         {"~"}
     </div>
@@ -139,27 +139,22 @@ const experiences = [
                                 <div class="text-[11px] text-accent uppercase label-caps">
                                     Primary_Optimization
                                 </div>
-                                <div class="text-xs opacity-70 leading-relaxed">
+                                <p class="text-xs opacity-70 leading-relaxed font-sans">
                                     {exp.company === "Health One"
                                         ? "Focus on relational integrity and identity management via AWS Cognito."
                                         : "Focus on sub-millisecond I/O and Unix-compliant instructional design[cite: 50, 53]."}
-                                </div>
+                                </p>
                             </div>
 
-                            <div class="space-y-1">
-                                <div class="text-[11px] text-accent uppercase label-caps">
+                            <div class="space-y-1 border-sm">
+                                <div class="text-[11px] text-accent uppercase label-caps ">
                                     Deployment_Target
                                 </div>
-                                <code class="text-xs text-accent bg-accent/5 px-2 py-1 rounded">
+                                <code class="text-xs text-accent bg-accent/5 px-2 py-1 rounded border border-accent/20">
                                     {exp.company === "Health One"
                                         ? "aws-us-east-1"
                                         : "deno-deploy-edge"}
                                 </code>
-                            </div>
-                            <div class="pt-12 relative opacity-10">
-                                <div class="text-[8px] uppercase tracking-[0.5em] [writing-mode:vertical-lr] absolute right-0">
-                                    AUTH_LEVEL_INTERNAL // TRACE_ID_{exp.id}
-                                </div>
                             </div>
                         </div>
                     </div>
